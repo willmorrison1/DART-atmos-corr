@@ -6,6 +6,4 @@ This repository will be updated with [tutorials](tutorials) and more [code](code
 ![DARTscene3D_London_Islington](readme/DARTscene3D_London_Islington.PNG)
 *Figure 1. DART "Scene 3D" view of central London area (430 m x 430 m) used for testing of DART atmospheric correction.*
 
-A software package is being developed to work with DART outputs: daRt for the R programming language. An early release can be found [here](https://github.com/willmorrison1/daRt).
-
-
+A software package has been developed to work with DART outputs: [daRt for the R programming language](https://github.com/willmorrison1/daRt) and complements the atmospheric correction processing and analysis.
