@@ -2,8 +2,8 @@
 #performs band integration on DART output images using a provided spectral response function. Useful as a standalone 
 #processing step to evaluate DART images, but cannot be used as part of a processing chain for the atmospheric correction
 #of any observed images unless a very narrow bandwidth is used enabling the correction of observations to be applied on a band 
-#description of atmospheric emission and absorption (cf. correction across each DART band, followed by band integration which requires 
-#additinal processing steps not performed in this script).
+#description of atmospheric emission and absorption (cf. correction of observations across each DART band, followed by band integration 
+#which requires additinal processing steps not performed in this script).
 
 #put this in DART subdir: tools/linux/
 
