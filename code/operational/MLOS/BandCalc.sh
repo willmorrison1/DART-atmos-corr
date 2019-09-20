@@ -7,7 +7,7 @@
 ##arguments
 #sim name
 simulationName=$1
-#SRF file name NOT incl. dir
+#SRF file name NOT incl. dir. file should exist in $DART_HOME/database/SensorSpectralFunction/
 SRFfilename=$2
 #T or F
 doBandCalc=$3
