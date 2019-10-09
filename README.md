@@ -23,7 +23,7 @@ process.
 ## Summary of atmospheric correction routine
 
 1.  [**Real world
-    images**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/tutorials/Real-world-images).
+    images**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/Real-world-images).
     Defines the types of ‘real world’ images that are suitable for
     correction using this technique
 2.  [**Model
