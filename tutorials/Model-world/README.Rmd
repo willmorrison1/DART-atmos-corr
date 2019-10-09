@@ -1,8 +1,3 @@
----
-output: github_document
-title: Model world
----
-
 # Summary
 
 The "model world" forms the basis of the three-dimensional (3D) environment used to perform the atmospheric correction for complex camera and terrain configurations. It is created using the [Blender](https://www.blender.org/) rendering software and facilitates the correct interpretation of:
@@ -10,7 +5,7 @@ The "model world" forms the basis of the three-dimensional (3D) environment used
 1. 3D surface geometry
 2. Camera intrinsic (e.g. focal length) and extrinsic (location, rotation) parameters
 
-In this tutorial, a model world will be created for the [real world camera image example](../tutorials/Real-world-images). The tutorial has been tested using Blender v2.80.
+In this tutorial, a model world will be created for the [real world camera image example](../Real-world-images). The tutorial has been tested using Blender v2.80.
 
 # Geometry
 
