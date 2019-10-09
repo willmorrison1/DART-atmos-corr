@@ -1,8 +1,3 @@
----
-output: github_document
----
-
-
 #Model world definition and creation
 
 #Summary
