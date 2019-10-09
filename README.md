@@ -26,7 +26,8 @@ process.
     types of ‘real world’ images that are suitable for correction using
     this technique
 2.  [**Model world**](tutorials/Model-world). Configure a
-    three-dimensional model world to faciliate the correction.
+    three-dimensional model world to interpret the sensors and faciliate
+    the correction.
 3.  [**Create multi line of sight
     image**](tutorials/Multi-line-of-sight-images). Optional. Create
     multi line of sight (MLOS) image with per-pixel path lengths between
