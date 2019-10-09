@@ -11,13 +11,13 @@ The "model world" forms the basis of the three-dimensional environment used to p
 1. Three-dimensional surface geometry
 2. Camera intrinsic (e.g. focal length) and extrinsic (location, rotation) parameters
 
-In this tutorial, a model world will be created for the [real world camera image example](../Real-world-images). The tutorial has been tested using Blender v2.80.
+In this tutorial, a model world will be created for the [real world camera image example](tutorials/Real-world-images). The tutorial has been tested using Blender v2.80.
 
 #Load geometry
 
-The sample geometry data is found [here](README_files/geoemtry/). In a new Blender session:
+The sample geometry data is found [here](tutorials/Model-world/README_files/geoemtry/). In a new Blender session:
 - Delete all existing objects (camera, cube, etc)
-- Load [IMU_sample_geometry.obj](README_files/geoemtry/IMU_sample_geometry.obj) in Blender
+- Load [IMU_sample_geometry.obj](tutorials/Model-world/README_files/geoemtry/IMU_sample_geometry.obj) in Blender
 
 You will be presented with the following GUI
-![BlenderGUI_1](README_files/figure-misc/BlenderGUI_1.PNG)
+![BlenderGUI_1](tutorials/Model-world/README_files/figure-misc/BlenderGUI_1.PNG)
