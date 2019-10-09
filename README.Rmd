@@ -1,6 +1,7 @@
 ---
 output: github_document
 ---
+
 # DART-atmos-corr
 A place for code and tutorials for atmospheric correction of longwave infrared camera imagery using the [Discrete Anisotropic Radiative Transfer (DART)](http://www.cesbio.ups-tlse.fr/us/dart.html) model.
 
@@ -27,6 +28,11 @@ Optional. Process the MLOS image mask with the DART-processed images.
 Correct the real world images using the simulated images.
 7. [**Image analysis**](tutorials/Image-analysis). Perform some simple analysis on processed images.
 
+
+```{r GlobalOptions, include = FALSE}
+options(knitr.duplicate.label = 'allow')
+```
+
 ```{r, include = FALSE}
 library(knitr)
 library(tools)
@@ -34,6 +40,8 @@ rmdFiles <- list.files(pattern = ".Rmd", recursive = TRUE, full.names = TRUE)
 rmdFiles <- rmdFiles[!grepl("README.Rmd", rmdFiles)]
 baseDir <- getwd()
 for (i in 1:length(rmdFiles)) {
+  # setwd(file.path(baseDir, dirname(rmdFiles[i])))
   knitr::knit(input = file.path(baseDir, rmdFiles[i]), output = file.path(baseDir, dirname(rmdFiles[i]), "README.md"))
 }
+# setwd(baseDir)
 ```
