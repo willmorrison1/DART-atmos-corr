@@ -1,3 +1,8 @@
+---
+output: github_document
+---
+
+
 #Model world definition and creation
 
 #Summary
@@ -20,7 +25,7 @@ The sample geometry data is found [here](tutorials/Model-world/README_files/geom
 ##Examine
 
 You will be presented with the following GUI. The colours represent the different surface types (orientation and material). Pan around the scene with the mouse and holding down the middle mouse button.
-![BlenderGUI_read3Dmodel](tutorials/Model-world/README_files/figure-misc/BlenderGUI_1.PNG)
+![BlenderGUI_read3Dmodel](README_files/figure-misc/BlenderGUI_1.PNG)
 
 
 #Camera
@@ -38,7 +43,7 @@ then you will see the location and rotation XYZ "transform" parameters window.
 Modify these 6 parameters to all be 0 and the camera will be located at X=0,Y=0,Z=0 world coordinates, with rotation of 0 across 3D vector elements X,Y,Z. Press
   Crtl + Numpad0
 to view the geometry through the camera viewport.
-![BlenderGUI_cameraViewport](tutorials/Model-world/README_files/figure-misc/BlenderGUI_2.PNG)
+![BlenderGUI_cameraViewport](README_files/figure-misc/BlenderGUI_2.PNG)
 
 
 
