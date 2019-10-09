@@ -1,5 +1,5 @@
 ---
-output: html_document
+output: github_document
 ---
 # DART-atmos-corr
 A place for code and tutorials for atmospheric correction of longwave infrared camera imagery using the [Discrete Anisotropic Radiative Transfer (DART)](http://www.cesbio.ups-tlse.fr/us/dart.html) model.
