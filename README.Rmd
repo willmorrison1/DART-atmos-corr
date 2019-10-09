@@ -36,6 +36,6 @@ baseDir <- getwd()
 for (i in 1:length(rmdFiles)) {
   dirName_i <- dirname(rmdFiles[i])
   mdFile_i <- paste0(tools::file_path_sans_ext(basename(rmdFiles[i])), ".md")
-  knitr::knit(input = file.path(baseDir, rmdFiles[i]), output = file.path(baseDir, mdFile_i))
+  knitr::knit(input = file.path(baseDir, rmdFiles[i]), output = file.path(baseDir, dirName_i, mdFile_i))
 }
 ```
