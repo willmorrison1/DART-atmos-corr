@@ -11,20 +11,20 @@ This repository is being constantly updated with [tutorials](tutorials) and [cod
 ## Summary of atmospheric correction routine 
 The overall routine is summarised in the below flowchart. Click on a flowchart element to be directed to the appropriate documentation (WIP).
 
-```{r echo = FALSE, warning = FALSE}
-library(DiagrammeR)
-DiagrammeR::mermaid('
-graph TB
-            A(Real world image)-->B(Configure Blender model world)            
-            B-->C(Create multi line of sight image)
-            B-->D(Run DART atmosphere simulation)
-            C-->E
-            D-->E
-            E(Post process images)-->F(Band calculation and correction)
-            A-->F
-            F-->G(Analysis)')
-
-```
+# ```{r echo = FALSE, warning = FALSE}
+# library(DiagrammeR)
+# DiagrammeR::mermaid('
+# graph TB
+#             A(Real world image)-->B(Configure Blender model world)            
+#             B-->C(Create multi line of sight image)
+#             B-->D(Run DART atmosphere simulation)
+#             C-->E
+#             D-->E
+#             E(Post process images)-->F(Band calculation and correction)
+#             A-->F
+#             F-->G(Analysis)')
+# 
+# ```
 A software package has been developed to work with DART outputs: [daRt for the R programming language](https://github.com/willmorrison1/daRt) and complements the atmospheric correction processing and analysis. daRt methods are being developed to simplify the atmospheric correction process. 
 
 ![DARTscene3D_London_Islington](readme/DARTscene3D_London_Islington.PNG)
