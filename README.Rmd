@@ -34,8 +34,6 @@ rmdFiles <- list.files(pattern = ".Rmd", recursive = TRUE, full.names = TRUE)
 rmdFiles <- rmdFiles[!grepl("README.Rmd", rmdFiles)]
 baseDir <- getwd()
 for (i in 1:length(rmdFiles)) {
-  dirName_i <- dirname(rmdFiles[i])
-  mdFile_i <- paste0(tools::file_path_sans_ext(basename(rmdFiles[i])), ".md")
-  knitr::knit(input = file.path(baseDir, rmdFiles[i]), output = file.path(baseDir, dirName_i, "README.md"))
+  knitr::knit(input = file.path(baseDir, rmdFiles[i]), output = file.path(baseDir, dirname(rmdFiles[i]), "README.md"))
 }
 ```
