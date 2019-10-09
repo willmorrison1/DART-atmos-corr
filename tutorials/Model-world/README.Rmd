@@ -1,13 +1,13 @@
 # Summary
 
-The "model world" forms the basis of the three-dimensional (3D) environment used to perform the atmospheric correction for complex camera and terrain configurations. It is created using the [Blender](https://www.blender.org/) rendering software and facilitates the correct interpretation of:
+The 'model world' forms the basis of the three-dimensional (3D) environment used to perform the atmospheric correction for complex camera and terrain configurations. It is created using the [Blender](https://www.blender.org/) rendering software and facilitates the correct interpretation of:
 
 1. 3D surface geometry
 2. Camera intrinsic (e.g. focal length) and extrinsic (location, rotation) parameters
 
-Given the cameras used here are static, photogrammetry techniques such as structure from motion cannot easily be used to automatically determine the location and rotation of 'model world' cameras in the 'model world' space. Therefore, 3D geometry is loaded into the rendering software and camera parameters are prescribed and manually adjusted set to give accurate 'model world' perspectives of the [real world cameras](../Real-world-images).   
+Given the cameras used here are static, photogrammetry techniques such as structure from motion cannot automatically determine the location and rotation of [real world cameras](../Real-world-images). Therefore, 3D geometry is loaded into the rendering software. Then, real world camera parameters are prescribed to give accurate 'model world' perspectives of the real world cameras.   
 
-In this tutorial, a model world will be created for the [real world camera image example](../Real-world-images). The tutorial has been tested using Blender v2.80 and has the [completed tutorial environment](README_files/geometry/model-world.blend).
+In this tutorial, a 'model world' will be created for the [real world camera image example](../Real-world-images). The tutorial has been tested using Blender v2.80 and has the [completed tutorial environment](README_files/geometry/model-world.blend) for reference. The tutorial is not extensive and assumes basic understanding of Blender.
 
 # Geometry
 
