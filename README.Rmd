@@ -37,7 +37,8 @@ options(knitr.duplicate.label = 'allow')
 library(knitr)
 library(tools)
 rmdFiles <- list.files(pattern = ".Rmd", recursive = TRUE, full.names = TRUE)
-rmdFiles <- rmdFiles[!grepl("README.Rmd", rmdFiles)]
+rmdFiles_base <- list.files(pattern = ".Rmd", recursive = FALSE, full.names = TRUE)
+rmdFiles <- rmdFiles[!grepl(rmdFiles_base, rmdFiles)]
 baseDir <- getwd()
 for (i in 1:length(rmdFiles)) {
   # setwd(file.path(baseDir, dirname(rmdFiles[i])))
