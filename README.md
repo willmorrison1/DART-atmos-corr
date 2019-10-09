@@ -27,7 +27,7 @@ process.
     Defines the types of ‘real world’ images that are suitable for
     correction using this technique
 2.  [**Model
-    world**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/MW).
+    world**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/Model-world).
     Configure a three-dimensional model world to faciliate the
     correction.
 3.  [**Create multi line of sight
