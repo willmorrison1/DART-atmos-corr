@@ -13,7 +13,7 @@ A software package has been developed to work with DART outputs: [daRt for the R
 
 ## Summary of atmospheric correction routine 
 
-1. [**Real world images**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/Real-world-images). 
+1. [**Real world images**](tutorials/Real-world-images). 
 Defines the types of 'real world' images that are suitable for correction using this technique
 2. [**Model world**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/Model-world). 
  Configure a three-dimensional model world to faciliate the correction.
