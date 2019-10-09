@@ -23,7 +23,7 @@ process.
 ## Summary of atmospheric correction routine
 
 1.  [**Real world
-    images**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/tutorials/Real%20world%20images).
+    images**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/tutorials/Real-world-images).
     Defines the types of ‘real world’ images that are suitable for
     correction using this technique
 2.  [**Model
@@ -31,19 +31,19 @@ process.
     Configure a three-dimensional model world to faciliate the
     correction.
 3.  [**Create multi line of sight
-    image**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/Multi%20line%20of%20sight%20images).
+    image**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/Multi-line-of-sight-images).
     Optional. Create multi line of sight (MLOS) image with per-pixel
     path lengths between the surface and camera.
 4.  [**DART atmosphere
-    simulation**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/DART%20simulation).
+    simulation**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/DART-simulation).
     Configure and run DART for simulation of atmospheric effects.
 5.  [**DART image
-    post-processing**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/DART%20simulation%20post%20processing).
+    post-processing**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/DART-simulation-post-processing).
     Optional. Process the MLOS image mask with the DART-processed
     images.
 6.  [**Band calculation and
-    correction**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/Band%20calculation).
+    correction**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/Band-calculation).
     Correct the real world images using the simulated images.
 7.  [**Image
-    analysis**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/Image%20analysis).
+    analysis**](https://github.com/willmorrison1/DART-atmos-corr/tree/master/tutorials/Image-analysis).
     Perform some simple analysis on processed images.
