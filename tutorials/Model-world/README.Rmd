@@ -18,9 +18,9 @@ In this tutorial, a model world will be created for the [real world camera image
 
 ##Import
 
-The sample geometry data is found [here](tutorials/Model-world/README_files/geometry). In a new Blender session:
+The sample geometry data is found [here](README_files/geometry). In a new Blender session:
 - Delete all existing objects (camera, cube, etc)
-- Load [IMU_sample_geometry.obj](tutorials/Model-world/README_files/geometry/IMU_sample_geometry.obj) in Blender
+- Load [IMU_sample_geometry.obj](README_files/geometry/IMU_sample_geometry.obj) in Blender
 
 ##Examine
 
