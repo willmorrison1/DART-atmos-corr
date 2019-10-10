@@ -37,7 +37,7 @@ The [output file(s)](README_files/figure-misc/Camera.tiff) will be saved in a fo
 
 ``` {r}
 library(raster)
-plot(raster("README_files/figure-misc/Camera.tiff"))
+plot(raster("README_files/figure-misc/Camera.tiff"), main = "RAW tiff")
 ```
 
 The image colourdepth is scaled to 16 bit tiff format. To rescale this to units of m, the files should be loaded and rescaled using the following formula
@@ -54,7 +54,7 @@ library(raster)
 RAW <- raster("README_files/figure-misc/Camera.tiff")
 renderDistance <- 5000 # m
 zPath <- (RAW / 65535) * renderDistance
-plot(zPath, zlim = c(0, 500))
+plot(zPath, zlim = c(0, 250), main = "Camera to surface path length (m)")
 writeRaster(x = zPath, 
             filename = "README_files/figure-misc/Camera_zPath.tiff", 
             overwrite = TRUE)

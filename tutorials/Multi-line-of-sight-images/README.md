@@ -45,7 +45,7 @@ library(raster)
 ```
 
 ```r
-plot(raster("README_files/figure-misc/Camera.tiff"))
+plot(raster("README_files/figure-misc/Camera.tiff"), main = "RAW tiff")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-1-2-1.png)<!-- -->
@@ -65,7 +65,7 @@ library(raster)
 RAW <- raster("README_files/figure-misc/Camera.tiff")
 renderDistance <- 5000 # m
 zPath <- (RAW / 65535) * renderDistance
-plot(zPath, zlim = c(0, 500))
+plot(zPath, zlim = c(0, 250), main = "Camera to surface path length (m)")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
