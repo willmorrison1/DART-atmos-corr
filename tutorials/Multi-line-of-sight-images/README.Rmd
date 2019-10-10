@@ -55,6 +55,9 @@ RAW <- raster("README_files/figure-misc/Camera.tiff")
 renderDistance <- 5000 # m
 zPath <- (RAW / 65535) * renderDistance
 plot(zPath, zlim = c(0, 250), main = "Camera to surface path length (m)")
+```
+This file is available for reference.
+``` {r}
 writeRaster(x = zPath, 
             filename = "README_files/figure-misc/Camera_zPath.tiff", 
             overwrite = TRUE)

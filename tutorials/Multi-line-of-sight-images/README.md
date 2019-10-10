@@ -69,6 +69,7 @@ plot(zPath, zlim = c(0, 250), main = "Camera to surface path length (m)")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+This file is available for reference.
 
 ```r
 writeRaster(x = zPath, 
