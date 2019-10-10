@@ -35,7 +35,10 @@ Execute the following command (will require modification based on your file loca
 
 The [output file(s)](README_files/figure-misc/Camera.tiff) will be saved in a folder `cameraPathLengths` in the current command line directory.
 
-![Blender_zpath_raw](README_files/figure-misc/Camera.tiff)
+``` {r}
+library(raster)
+plot(raster("README_files/figure-misc/Camera.tiff"))
+```
 
 The image colourdepth is scaled to 16 bit tiff format. To rescale this to units of m, the files should be loaded and rescaled using the following formula
 

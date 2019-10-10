@@ -35,7 +35,20 @@ Execute the following command (will require modification based on your file loca
 
 The [output file(s)](README_files/figure-misc/Camera.tiff) will be saved in a folder `cameraPathLengths` in the current command line directory.
 
-![Blender_zpath_raw](README_files/figure-misc/Camera.tiff)
+
+```r
+library(raster)
+```
+
+```
+## Loading required package: sp
+```
+
+```r
+plot(raster("README_files/figure-misc/Camera.tiff"))
+```
+
+![](README_files/figure-gfm/unnamed-chunk-1-2-1.png)<!-- -->
 
 The image colourdepth is scaled to 16 bit tiff format. To rescale this to units of m, the files should be loaded and rescaled using the following formula
 
@@ -49,20 +62,13 @@ where `zPath` is the scaled path length (m) `RAW` is the [raw image](README_file
 
 ```r
 library(raster)
-```
-
-```
-## Loading required package: sp
-```
-
-```r
 RAW <- raster("README_files/figure-misc/Camera.tiff")
 renderDistance <- 5000 # m
 zPath <- (RAW / 65535) * renderDistance
 plot(zPath, zlim = c(0, 500))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-1-2-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ```r
 writeRaster(x = zPath, 
