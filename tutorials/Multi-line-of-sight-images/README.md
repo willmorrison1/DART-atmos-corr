@@ -20,9 +20,10 @@ Define the python script location to be used by Blender to get the surface to ca
 
 ```
 "tutorials\Multi-line-of-sight-images\code\writeCameraPathLengths.py"
+```
 
 This script can be modified with various rendering paramters (e.g. image resolution). By default it conforms to the 
-[real world image](../Real-world-images).
+[real world image](../Real-world-images). it also contains many important rendering setings to ensure the colourspace of teh render is correctly converted to distance with units m.
 
 ```
 Execute the following command (will require modification based on your file locations) in a command line:
@@ -37,7 +38,7 @@ The [output file(s)](README_files/figure-misc/Camera.tiff) will be saved in a fo
 
 
 ```r
-library(raster)
+library(raster, sp)
 ```
 
 ```
@@ -61,7 +62,7 @@ where `zPath` is the scaled path length (m) `RAW` is the [raw image](README_file
 
 
 ```r
-library(raster)
+library(raster, sp)
 RAW <- raster("README_files/figure-misc/Camera.tiff")
 renderDistance <- 5000 # m
 zPath <- (RAW / 65535) * renderDistance
@@ -69,7 +70,9 @@ plot(zPath, zlim = c(0, 250), main = "Camera to surface path length (m)")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
-This file is available for reference.
+
+This image is available for reference.
+
 
 ```r
 writeRaster(x = zPath, 

@@ -24,7 +24,7 @@ bpy.data.scenes[0].sequencer_colorspace_settings.name = "Linear"
 #set min render distance to zero
 minRenderDist = 0.001
 #set maximum render distance to 5000 m
-maxRenderDist = 2000
+maxRenderDist = 5000
 #Set up rendering of depth map:
 bpy.context.scene.use_nodes = True
 tree = bpy.context.scene.node_tree

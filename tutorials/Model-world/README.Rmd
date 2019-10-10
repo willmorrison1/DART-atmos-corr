@@ -73,7 +73,7 @@ to allow the user to manually move the camera with the mouse when a semi-transpa
 
 ## Intrinsic values
 
-After selecting the camera in the scene collection window, navigate the icons in the [red circle](BlenderGUI_read3Dmodel) to set:
+After selecting the camera in the scene collection window, navigate the icons in the [red circle in the above image](README_files/figure-misc/BlenderGUI_1.PNG) to set:
 
 * **Number of pixels** The tab with the printer icon ('Output').
 * **Field of view** The tab with the green film camera icon ('Object data').
