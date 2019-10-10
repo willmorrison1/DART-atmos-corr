@@ -14,9 +14,12 @@ bpy.data.scenes[0].render.image_settings.file_format = "TIFF"
 bpy.data.scenes[0].render.image_settings.color_depth = "16"
 bpy.data.scenes[0].render.image_settings.color_mode = "RGB"
 bpy.data.scenes[0].render.image_settings.tiff_codec = "NONE"
+bpy.data.scenes[0].render.resolution_x = 160
+bpy.data.scenes[0].render.resolution_y = 120
+bpy.data.scenes[0].render.resolution_percentage = 100
 
 #set min render distance to zero
-minRenderDist = 0
+minRenderDist = 0.01
 #set maximum render distance to 5000 m
 maxRenderDist = 5000
 #Set up rendering of depth map:
