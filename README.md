@@ -28,17 +28,20 @@ process.
 2.  [**Model world**](tutorials/Model-world). Configure a
     three-dimensional model world to interpret the sensors and faciliate
     the correction.
-3.  [**Create multi line of sight
-    image**](tutorials/Multi-line-of-sight-images). Optional. Create
-    multi line of sight (MLOS) image with per-pixel path lengths between
-    the surface and camera.
-4.  [**DART atmosphere simulation**](tutorials/DART-simulation).
+3.  [**DART atmosphere simulation**](tutorials/DART-simulation).
     Configure and run DART for simulation of atmospheric effects.
-5.  [**DART image
+4.  [**Band calculation and correction**](tutorials/Band-calculation).
+    Correct the real world images using the atmosphere simulation.
+
+### Optional steps
+
+1.  [**Create multi line of sight
+    image**](tutorials/Multi-line-of-sight-images). Create multi line of
+    sight (MLOS) image with per-pixel path lengths between the surface
+    and camera.
+2.  [**DART image
     post-processing**](tutorials/DART-simulation-post-processing).
     Optional. Process the MLOS image mask with the DART-processed
     images.
-6.  [**Band calculation and correction**](tutorials/Band-calculation).
-    Correct the real world images using the simulated images.
-7.  [**Image analysis**](tutorials/Image-analysis). Perform some simple
+3.  [**Image analysis**](tutorials/Image-analysis). Perform some simple
     analysis on processed images.

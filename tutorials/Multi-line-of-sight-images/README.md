@@ -22,8 +22,8 @@ Define the python script location to be used by Blender to get the surface to ca
 "tutorials\Multi-line-of-sight-images\code\writeCameraPathLengths.py"
 ```
 
-This script can be modified with various rendering paramters (e.g. image resolution). By default it conforms to the 
-[real world image](../Real-world-images). it also contains many important rendering setings to ensure the colourspace of teh render is correctly converted to distance with units m.
+This script can be modified with various rendering parameters (e.g. image resolution). By default it conforms to the 
+[real world image](../Real-world-images). It also contains many important rendering setings to ensure the colourspace of the render enables correct conversion to distance (m).
 
 ```
 Execute the following command (will require modification based on your file locations) in a command line:
@@ -34,7 +34,7 @@ Execute the following command (will require modification based on your file loca
   
 # Output
 
-The [output file(s)](README_files/figure-misc/Camera.tiff) will be saved in a folder `cameraPathLengths` in the current command line directory.
+The [output file(s)](README_files/figure-misc/Camera.tiff) will be saved in a folder `cameraPathLengths` as shown in the command line message upon program completion.
 
 
 ```r
