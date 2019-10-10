@@ -10,18 +10,21 @@ outDir = "cameraPathLengths/"
 scene = bpy.context.scene
 
 #set renderer options
+bpy.data.scenes[0].render.engine = "CYCLES"
 bpy.data.scenes[0].render.image_settings.file_format = "TIFF"
 bpy.data.scenes[0].render.image_settings.color_depth = "16"
-bpy.data.scenes[0].render.image_settings.color_mode = "RGB"
+bpy.data.scenes[0].render.image_settings.color_mode = "BW"
 bpy.data.scenes[0].render.image_settings.tiff_codec = "NONE"
 bpy.data.scenes[0].render.resolution_x = 160
 bpy.data.scenes[0].render.resolution_y = 120
 bpy.data.scenes[0].render.resolution_percentage = 100
+bpy.data.scenes[0].display_settings.display_device = "None"
+bpy.data.scenes[0].sequencer_colorspace_settings.name = "Linear"
 
 #set min render distance to zero
-minRenderDist = 0.01
+minRenderDist = 0.001
 #set maximum render distance to 5000 m
-maxRenderDist = 5000
+maxRenderDist = 2000
 #Set up rendering of depth map:
 bpy.context.scene.use_nodes = True
 tree = bpy.context.scene.node_tree
