@@ -38,13 +38,13 @@ Shift + "a" -> "Camera"
 
 Select the the camera (click on it, top right in "scene collection"), press *n*, then you will see the location and rotation XYZ "transform" parameters window.
 
-Modify these 6 parameters to have X = Y = Z = 100 world coordinates and rotation X = Y = Z = 0 3D vector elements. To view the newly altered geometry through the camera viewport, left click on the central window (the 'user perspective') and press
+Modify these 6 parameters to have X = Y = Z = 150 world coordinates and rotation X = Y = Z = 0 3D vector elements. To view the newly altered geometry through the camera viewport, left click on the central window (the 'user perspective') and press
 
 ```
 Crtl + Numpad0
 ```
 
-which gives a camera perspective looking directly downwards onto the scene. The center of the camera (camera axis) intersects the top right (X = Y = 100) corner of the 3D model. This is **not** the X = Y = 100 DART coordinates. 
+which gives a camera perspective looking directly downwards onto the scene. The center of the camera (camera axis) intersects the top right (X = Y = 150) corner of the 3D model. This is **not** the X = Y = 150 DART coordinates. 
 ![BlenderGUI_cameraViewport](README_files/figure-misc/BlenderGUI_2.PNG)
 
 The [real world camera example](../Real-world-images) has location:
