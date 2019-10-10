@@ -39,6 +39,7 @@ library(tools)
 rmdFiles <- list.files(path = "tutorials", pattern = ".Rmd", recursive = TRUE, full.names = TRUE)
 baseDir <- getwd()
 for (i in 1:length(rmdFiles)) {
+  setwd(file.path(baseDir, dirname(rmdFiles[i])))
   knitr::knit(input = file.path(baseDir, rmdFiles[i]), output = file.path(baseDir, dirname(rmdFiles[i]), "README.md"))
 }
 ```
