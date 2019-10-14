@@ -122,19 +122,20 @@ ggplot(radDF) +
 
 
 ```{r}
-SRF_raw <- data.frame("lambda" = seq(5, 20, by = 1e-5), "value" = seq(0.1, 1, length.out = length(seq(5, 20, by = 1e-5))) * 0.1)
+SRF_raw <- data.frame("lambda" = seq(5, 20, by = 1e-5), "value" = seq(1, 1, length.out = length(seq(5, 20, by = 1e-5))))
 ```
 
 
 simData_trans
 
 ```{r}
-SRFinterp <- function(SRF_raw, simData) {
+SRFinterp <- function(SRF_raw, simData, sigFig = 4) {
   
   require(dplyr)
   require(imputeTS)
   
-  sigFig <- 5
+  #todo - normalise
+  #todo - check within min and max
   
   lambdaCols <- c("lambdamin", "lambdamid", "lambdamax", "equivalentWavelength")
   wavelengthVals <- wavelengths(simData)
@@ -151,7 +152,6 @@ SRFinterp <- function(SRF_raw, simData) {
     dplyr::mutate(lambda = round(lambda, sigFig)) %>%
     dplyr::filter(!duplicated(lambda))
   
-  
   lambdaDF <- dfOUT %>% 
     dplyr::left_join(SRF_raw_edited, by = "lambda") %>%
     dplyr::mutate(value = imputeTS::na_interpolation(value))
@@ -166,31 +166,31 @@ SRFinterp <- function(SRF_raw, simData) {
   }
   
   wavelengthOutDF <- dplyr::bind_cols(wavelengthOut)
-  #todo - add per-simData
+  
   return(wavelengthOutDF)
 }
-
+#hereiam-not working as expected i think
 SRFinterpVals <- SRFinterp(SRF_raw = SRF_raw, simData = simData_trans)
 dataDF <- transDF
-#todo - join per-simData
 dataDF <- dataDF %>% 
-  dplyr::left_join(SRFinterpVals, by = c("band"))
+  dplyr::left_join(SRFinterpVals, by = c("band", "simName"))
 LHS <- dataDF$value * dataDF$lambdamin_SRF + dataDF$value * dataDF$lambdamid_SRF
 #get integrals for RHS of SRF - for each band
 RHS <- dataDF$value * dataDF$lambdamid_SRF + dataDF$value * dataDF$lambdamax_SRF
 integral <- (LHS + RHS) * (dataDF$lambdamax - dataDF$lambdamin) * 0.5
+
 dataDF$integral <- integral
 
-#hereiam - running this
 dataDF_out <- dataDF %>%
     dplyr::group_by(x, y, iter, imgType, imageNo, VZ, VA) %>%
-    dplyr::summarise(bandValue = sum(integral))
+    dplyr::summarise(bandValue = sum(integral, na.rm = TRUE))
 
-ggplot(dataDF_out) +
+ggplot(dataDF_out %>% filter(bandValue > 0)) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
   scale_x_reverse() +
   ggtitle("Atmospheric band transmittance")
+
 
 ```
