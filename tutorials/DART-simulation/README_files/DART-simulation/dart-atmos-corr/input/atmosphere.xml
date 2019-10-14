@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DartFile build="v1141" version="5.7.5">
+    <Atmosphere isRadiativeTransfertInBottomAtmosphereDefined="1">
+        <Aerosol>
+            <AerosolProperties aerosolCumulativeModelName="RURALV23"
+                aerosolOptDepthFactor="1"
+                aerosolsModelName="USSTD76_RURALV23"
+                databaseName="dart_atmosphere.db" hgParametersModelName="RURALV23"/>
+        </Aerosol>
+        <IsAtmosphere typeOfAtmosphere="1">
+            <AtmosphericOpticalPropertyModel co2MixRate="365.0"
+                correctionBandModel="0"
+                databaseName="dart_atmosphere.db"
+                gasCumulativeModelName="USSTD76" gasGroup="1"
+                gasModelName="USSTD76" ignoreGasForExtrapolation="1"
+                precipitableWaterAmountCkeckbox="0" redefTemperature="1"
+                scaleOtherGases="0" temperatureModelName="USSTD76">
+                <ignoredGas CH4="0" CO="0" CO2="0" H2O="1" HNO3="0"
+                    N2="0" N2O="0" NH3="0" NO="0" NO2="0" O2="0" O3="0" SO2="0">
+                    <fillH2O ifFillH2O="1">
+                        <h2oDef altitude="100" dist="160"
+                            pressure="1013" rh="40" temp="273.15"/>
+                    </fillH2O>
+                </ignoredGas>
+                <tempParameters altitude="0" temp="288.15"/>
+            </AtmosphericOpticalPropertyModel>
+            <AtmosphereIterations>
+                <AtmosphereTransfertFunctions inputOutputTransfertFunctions="0">
+                    <ComputedTransferFunctions writeTransferFunctions="0"/>
+                </AtmosphereTransfertFunctions>
+                <AtmosphereProducts atmosphereBRF_TOA="0"
+                    atmosphereRadiance_BOA_apresCouplage="0"
+                    atmosphereRadiance_BOA_avantCouplage="0"
+                    atmosphereReport="0" ordreUnAtmos="0"/>
+                <AtmosphereComponents downwardingFluxes="0" upwardingFluxes="0"/>
+                <AtmosphereExpertModeZone extrapol_atmos="1"
+                    number_iterationMax="100" threshold_Atmos_scattering="0.0001"/>
+            </AtmosphereIterations>
+            <AtmosphereGeometry discretisationAtmos="1"
+                heightOfSensor="3000" minimumNumberOfDivisions="4">
+                <discretisationAtmosAuto epsilon_atmos="0.003"
+                    gamma_atmos="0.95" xAI="400.0" yAI="400.0"/>
+            </AtmosphereGeometry>
+            <isRadiativeTransfertInBottomAtmosphere BA_altitude="100" writeTemperatureFile="1"/>
+        </IsAtmosphere>
+    </Atmosphere>
+</DartFile>

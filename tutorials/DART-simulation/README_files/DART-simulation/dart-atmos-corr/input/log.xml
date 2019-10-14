@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DartParameterExceptions>
+    <DartParameterException>
+        <Origin>
+            <Name>Phase.DartProduct.dartModuleProducts.FluxTrackingModeProducts.BrfProductsProperties.maximalThetaImages</Name>
+            <Label>Maximal zenith angle of images                          </Label>
+            <Description>This is a threshold on the zenith angle of view directions: only images with a zenith angle smaller than this threshold are stored (in order to save computer memory)</Description>
+        </Origin>
+        <Message>
+            <OriginMessage>Value '-1.0' is lower than minimum available value '0.0'</OriginMessage>
+        </Message>
+    </DartParameterException>
+</DartParameterExceptions>

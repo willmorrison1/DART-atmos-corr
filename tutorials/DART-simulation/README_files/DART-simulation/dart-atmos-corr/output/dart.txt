@@ -1,0 +1,141 @@
+Version 5.7.5 (2019/08/29 v1141)
+Fri Oct 11 15:34:47 2019
+
+* Earth scene: Number of cells (X, Y, Z)  _______________ * 30 30 11
+* Earth scene: Size of elementary cells (X, Y, Z, meters) * 10.000000 10.000000 10.000000
+* Earth scene: Scene size (X, Y, Z, meters) _____________ * 300.000000 300.000000 110.000000
+* Upward Sun direction (theta, phi, degree) _____________ * 30.000000 225.000000
+* Number of directions __________________________________ * 501
+* Max zenith angle of stored images _____________________ * 1.000000
+* Number of stored images _______________________________ * 2
+* Specular modeling _____________________________________ * 0
+* Power threshold to stop rays __________________________ * 0.000100
+* Scene exitance threshold to stop iterations ___________ * 0.000100
+* Maximal number of iterations __________________________ * 1
+* Maximum number of exiting ray per face per direction __ * 1
+* Number of sub-cells for interception __________________ * 27
+* Mode of Earth scene illumination ______________________ * 0 * Isotropic atmosphere *
+
+* Spectral band	Lambda min	Lambda max (micron)	Mode *
+	0	7.000000	7.200000	T
+	1	7.200000	7.400000	T
+	2	7.400000	7.600000	T
+	3	7.600000	7.800000	T
+	4	7.800000	8.000000	T
+	5	8.000000	8.200000	T
+	6	8.200000	8.400000	T
+	7	8.400000	8.600000	T
+	8	8.600000	8.800000	T
+	9	8.800000	9.000000	T
+	10	9.000000	9.200000	T
+	11	9.200000	9.400000	T
+	12	9.400000	9.600000	T
+	13	9.600000	9.800000	T
+	14	9.800000	10.000000	T
+	15	10.000000	10.200000	T
+	16	10.200000	10.400000	T
+	17	10.400000	10.600000	T
+	18	10.600000	10.800000	T
+	19	10.800000	11.000000	T
+	20	11.000000	11.200000	T
+	21	11.200000	11.400000	T
+	22	11.400000	11.600000	T
+	23	11.600000	11.800000	T
+	24	11.800000	12.000000	T
+	25	12.000000	12.200000	T
+	26	12.200000	12.400000	T
+	27	12.400000	12.600000	T
+	28	12.600000	12.800000	T
+	29	12.800000	13.000000	T
+	30	13.000000	13.200000	T
+	31	13.200000	13.400000	T
+	32	13.400000	13.600000	T
+	33	13.600000	13.800000	T
+	34	13.800000	14.000000	T
+
+* Irradiance [W/m2/micron] and SKYL per spectral band (before backscattering) *
+	* TOA (direct: sun direction)	* 0.816695	0.732559	0.658221	0.594555	0.537714	0.487113	0.442682	0.403195	0.367875	0.336268	0.308163	0.282988	0.260200	0.239686	0.221161	0.204520	0.189321	0.175457	0.162889	0.151375	0.140910	0.131263	0.122504	0.114424	0.107005	0.100209	0.093860	0.088071	0.082733	0.077755	0.073148	0.068893	0.064954	0.061260	0.057841	
+	* BOA direct (sun direction) 	* 0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	
+	* BOA diffuse                  	* 0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	
+	* BOA Total                    	* 0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	
+	* Total back-scattered to TOA  	* 0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	
+	* Absorption                   	* 0.816695	0.732559	0.658221	0.594555	0.537714	0.487113	0.442682	0.403195	0.367875	0.336268	0.308163	0.282988	0.260200	0.239686	0.221161	0.204520	0.189321	0.175457	0.162889	0.151375	0.140910	0.131263	0.122504	0.114424	0.107005	0.100209	0.093860	0.088071	0.082733	0.077755	0.073148	0.068893	0.064954	0.061260	0.057841	
+	* SKYL [0-100]               	* 0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	
+
+Level	Iteration	Albedo / Temp	Extrapol. A / T	Exitance (W/m2/micron) (per spectral band) * 
+  BOA	 1 	166.853254	0.000000	0.110176 | 	165.031429	0.000000	0.117387 | 	164.512141	0.000000	0.135921 | 	163.494307	0.000000	0.150299 | 	161.140493	0.000000	0.150054 | 	159.914783	0.000000	0.160860 | 	158.050890	0.000000	0.163753 | 	156.289175	0.000000	0.166769 | 	154.596238	0.000000	0.169590 | 	152.907914	0.000000	0.171506 | 	151.255737	0.000000	0.172923 | 	149.633693	0.000000	0.173812 | 	148.049925	0.000000	0.174312 | 	146.504104	0.000000	0.174458 | 	144.993583	0.000000	0.174247 | 	143.524357	0.000000	0.173751 | 	142.102870	0.000000	0.172830 | 	140.910394	0.000000	0.171688 | 	139.174000	0.000000	0.170374 | 	137.826596	0.000000	0.168785 | 	136.497217	0.000000	0.167029 | 	135.181720	0.000000	0.164995 | 	133.901336	0.000000	0.162933 | 	132.624998	0.000000	0.160511 | 	131.405791	0.000000	0.158348 | 	130.193509	0.000000	0.155903 | 	129.001494	0.000000	0.153349 | 	127.781375	0.000000	0.150194 | 	126.685648	0.000000	0.148074 | 	125.541896	0.000000	0.145184 | 	124.460584	0.000000	0.142693 | 	123.311812	0.000000	0.139304 | 	122.160714	0.000000	0.135714 | 	121.107678	0.000000	0.132905 | 	120.079740	0.000000	0.130161
+	 iterX 	166.853254	0.000000	0.110176 | 	165.031429	0.000000	0.117387 | 	164.512141	0.000000	0.135921 | 	163.494307	0.000000	0.150299 | 	161.140493	0.000000	0.150054 | 	159.914783	0.000000	0.160860 | 	158.050890	0.000000	0.163753 | 	156.289175	0.000000	0.166769 | 	154.596238	0.000000	0.169590 | 	152.907914	0.000000	0.171506 | 	151.255737	0.000000	0.172923 | 	149.633693	0.000000	0.173812 | 	148.049925	0.000000	0.174312 | 	146.504104	0.000000	0.174458 | 	144.993583	0.000000	0.174247 | 	143.524357	0.000000	0.173751 | 	142.102870	0.000000	0.172830 | 	140.910394	0.000000	0.171688 | 	139.174000	0.000000	0.170374 | 	137.826596	0.000000	0.168785 | 	136.497217	0.000000	0.167029 | 	135.181720	0.000000	0.164995 | 	133.901336	0.000000	0.162933 | 	132.624998	0.000000	0.160511 | 	131.405791	0.000000	0.158348 | 	130.193509	0.000000	0.155903 | 	129.001494	0.000000	0.153349 | 	127.781375	0.000000	0.150194 | 	126.685648	0.000000	0.148074 | 	125.541896	0.000000	0.145184 | 	124.460584	0.000000	0.142693 | 	123.311812	0.000000	0.139304 | 	122.160714	0.000000	0.135714 | 	121.107678	0.000000	0.132905 | 	120.079740	0.000000	0.130161
+
+* band 0: lost energy [W/m2(scene)/micron] * 9166.201843
+* band 1: lost energy [W/m2(scene)/micron] * 9601.574748
+* band 2: lost energy [W/m2(scene)/micron] * 9996.651294
+* band 3: lost energy [W/m2(scene)/micron] * 10350.802086
+* band 4: lost energy [W/m2(scene)/micron] * 10664.050909
+* band 5: lost energy [W/m2(scene)/micron] * 10936.977539
+* band 6: lost energy [W/m2(scene)/micron] * 11170.589535
+* band 7: lost energy [W/m2(scene)/micron] * 11366.257841
+* band 8: lost energy [W/m2(scene)/micron] * 11525.622789
+* band 9: lost energy [W/m2(scene)/micron] * 11650.525647
+* band 10: lost energy [W/m2(scene)/micron] * 11742.947464
+* band 11: lost energy [W/m2(scene)/micron] * 11804.955953
+* band 12: lost energy [W/m2(scene)/micron] * 11838.661637
+* band 13: lost energy [W/m2(scene)/micron] * 11846.181369
+* band 14: lost energy [W/m2(scene)/micron] * 11829.608861
+* band 15: lost energy [W/m2(scene)/micron] * 11790.991267
+* band 16: lost energy [W/m2(scene)/micron] * 11732.310864
+* band 17: lost energy [W/m2(scene)/micron] * 11655.471550
+* band 18: lost energy [W/m2(scene)/micron] * 11562.288765
+* band 19: lost energy [W/m2(scene)/micron] * 11454.482786
+* band 20: lost energy [W/m2(scene)/micron] * 11333.674818
+* band 21: lost energy [W/m2(scene)/micron] * 11201.384945
+* band 22: lost energy [W/m2(scene)/micron] * 11059.032218
+* band 23: lost energy [W/m2(scene)/micron] * 10907.935534
+* band 24: lost energy [W/m2(scene)/micron] * 10749.316582
+* band 25: lost energy [W/m2(scene)/micron] * 10584.302152
+* band 26: lost energy [W/m2(scene)/micron] * 10413.928648
+* band 27: lost energy [W/m2(scene)/micron] * 10239.145719
+* band 28: lost energy [W/m2(scene)/micron] * 10060.821870
+* band 29: lost energy [W/m2(scene)/micron] * 9879.746798
+* band 30: lost energy [W/m2(scene)/micron] * 9696.638718
+* band 31: lost energy [W/m2(scene)/micron] * 9512.146783
+* band 32: lost energy [W/m2(scene)/micron] * 9326.857529
+* band 33: lost energy [W/m2(scene)/micron] * 9141.298664
+* band 34: lost energy [W/m2(scene)/micron] * 8955.942521
+* band 0: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 1: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 2: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 3: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 4: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 5: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 6: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 7: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 8: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 9: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 10: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 11: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 12: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 13: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 14: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 15: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 16: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 17: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 18: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 19: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 20: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 21: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 22: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 23: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 24: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 25: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 26: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 27: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 28: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 29: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 30: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 31: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 32: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 33: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+* band 34: energy that has gone underground [W/m2(scene)/micron] * 0.000000
+
+* Memory usage (GB) * 0.000
+* Processing time (hours, minutes, seconds)  * 0 2 59

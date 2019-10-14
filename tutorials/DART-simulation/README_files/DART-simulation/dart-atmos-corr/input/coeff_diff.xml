@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DartFile build="v1141" version="5.7.5">
+    <Coeff_diff fluorescenceFile="0" fluorescenceProducts="0">
+        <LambertianMultiFunctions>
+            <LambertianMulti ModelName="reflect_equal_1_trans_equal_0_0"
+                databaseName="Lambertian_mineral.db" ident="filler"
+                roStDev="0.000" useMultiplicativeFactorForLUT="1" useSpecular="0">
+                <ProspectExternalModule isFluorescent="0" useProspectExternalModule="0"/>
+                <lambertianNodeMultiplicativeFactorForLUT
+                    diffuseTransmittanceAcceleration="0."
+                    diffuseTransmittanceFactor="1"
+                    directTransmittanceFactor="1" reflectanceFactor="1"
+                    specularIntensityFactor="1"
+                    useSameFactorForAllBands="1" useSameOpticalFactorMatrixForAllBands="0">
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="1"
+                        directTransmittanceFactor="1"
+                        reflectanceFactor="1"
+                        specularIntensityFactor="1" useOpticalFactorMatrix="0"/>
+                </lambertianNodeMultiplicativeFactorForLUT>
+            </LambertianMulti>
+            <LambertianMulti ModelName="reflect_equal_1_trans_equal_0_0"
+                databaseName="Lambertian_mineral.db" ident="r=0"
+                roStDev="0.000" useMultiplicativeFactorForLUT="1" useSpecular="0">
+                <ProspectExternalModule isFluorescent="0" useProspectExternalModule="0"/>
+                <lambertianNodeMultiplicativeFactorForLUT
+                    diffuseTransmittanceAcceleration="0"
+                    diffuseTransmittanceFactor="0"
+                    directTransmittanceFactor="0" reflectanceFactor="0"
+                    specularIntensityFactor="0"
+                    useSameFactorForAllBands="1" useSameOpticalFactorMatrixForAllBands="0">
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                </lambertianNodeMultiplicativeFactorForLUT>
+            </LambertianMulti>
+            <LambertianMulti ModelName="reflect_equal_1_trans_equal_0_0"
+                databaseName="Lambertian_mineral.db"
+                ident="r=0_backface" roStDev="0.000"
+                useMultiplicativeFactorForLUT="1" useSpecular="0">
+                <ProspectExternalModule isFluorescent="0" useProspectExternalModule="0"/>
+                <lambertianNodeMultiplicativeFactorForLUT
+                    diffuseTransmittanceAcceleration="0"
+                    diffuseTransmittanceFactor="0"
+                    directTransmittanceFactor="0" reflectanceFactor="0"
+                    specularIntensityFactor="0"
+                    useSameFactorForAllBands="1" useSameOpticalFactorMatrixForAllBands="0">
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                    <lambertianMultiplicativeFactorForLUT
+                        diffuseTransmittanceFactor="0"
+                        directTransmittanceFactor="0"
+                        reflectanceFactor="0"
+                        specularIntensityFactor="0" useOpticalFactorMatrix="0"/>
+                </lambertianNodeMultiplicativeFactorForLUT>
+            </LambertianMulti>
+        </LambertianMultiFunctions>
+        <HapkeSpecularMultiFunctions/>
+        <RPVMultiFunctions/>
+        <UnderstoryMultiFunctions integrationStepOnPhi="10"
+            integrationStepOnTheta="1" outputLADFile="0"/>
+        <AirMultiFunctions/>
+        <PhaseExternMultiFunctions/>
+        <Temperatures>
+            <ThermalFunction deltaT="0" idTemperature="T=filler"
+                meanT="300.0" override3DMatrix="0"
+                singleTemperatureSurface="0" useOpticalFactorMatrix="0" usePrecomputedIPARs="0"/>
+            <ThermalFunction deltaT="0" idTemperature="T=300"
+                meanT="300.0" override3DMatrix="1"
+                singleTemperatureSurface="0" useOpticalFactorMatrix="0" usePrecomputedIPARs="0"/>
+            <ThermalFunction deltaT="0" idTemperature="T=0_backface"
+                meanT="0" override3DMatrix="1"
+                singleTemperatureSurface="0" useOpticalFactorMatrix="0" usePrecomputedIPARs="0"/>
+        </Temperatures>
+    </Coeff_diff>
+</DartFile>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DartFile build="v1141" version="5.7.5">
+    <object_3d generateTriangleFileXML="0">
+        <Types>
+            <DefaultTypes>
+                <DefaultType indexOT="101" name="Default_Object" typeColor="125 0 125"/>
+                <DefaultType indexOT="102" name="Leaf" typeColor="0 175 0"/>
+            </DefaultTypes>
+            <CustomTypes/>
+        </Types>
+        <ObjectList>
+            <Object
+                file_src="/storage/basic/micromet/Tier_processing/hv867657/DARTfiles/IMU_sample_geometry.obj"
+                hasGroups="0" hidden="0" isDisplayed="1" name="Object"
+                num="0" objectColor="125 0 125" objectDEMMode="2" repeatedOnBorder="0">
+                <GeometricProperties>
+                    <PositionProperties xpos="150" ypos="150" zpos="0"/>
+                    <Dimension3D xdim="300.08998107910156"
+                        ydim="300.15972900390625" zdim="77.79494762420654"/>
+                    <ScaleProperties xScaleDeviation="0.0" xscale="1.00"
+                        yScaleDeviation="0.0" yscale="1.00"
+                        zScaleDeviation="0.0" zscale="1.00"/>
+                    <RotationProperties xRotDeviation="0.0" xrot="0.00"
+                        yRotDeviation="0.0" yrot="0.00"
+                        zRotDeviation="0.0" zrot="0.00"/>
+                </GeometricProperties>
+                <ObjectOpticalProperties doubleFace="0" isLAICalc="0"
+                    isSingleGlobalLai="0" sameOPObject="1">
+                    <OpticalPropertyLink ident="r=0" indexFctPhase="1" type="0"/>
+                    <ThermalPropertyLink idTemperature="T=300" indexTemperature="1"/>
+                </ObjectOpticalProperties>
+                <ObjectTypeProperties sameOTObject="1">
+                    <ObjectTypeLink identOType="Default_Object" indexOT="101"/>
+                </ObjectTypeProperties>
+            </Object>
+        </ObjectList>
+        <ObjectFields/>
+    </object_3d>
+</DartFile>

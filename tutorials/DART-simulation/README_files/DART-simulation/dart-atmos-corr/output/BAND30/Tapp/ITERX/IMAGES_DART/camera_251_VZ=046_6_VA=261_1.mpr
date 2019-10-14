@@ -1,0 +1,25 @@
+[Ilwis]
+Description=Raster Map camera_251_VZ=046_6_VA=261_1
+Time=0
+Type=BaseMap
+
+[BaseMap]
+CoordSystem=unknown.csy
+CoordBounds=0 -0.048 0.036 0
+Domain=value.dom
+DomainInfo=value.dom;Long;value;0;-9999999.9:9999999.9:0.1:offset=0;
+Range=-1e+300:1e+300:0.000000:offset=0
+Type=Map
+MinMax=105.521:386.029
+
+[Map]
+GeoRef=camera_251_VZ=046_6_VA=261_1.grf
+Size=120 160
+Type=MapStore
+
+[MapStore]
+Data=camera_251_VZ=046_6_VA=261_1.mp#
+Type=Real
+Structure=Line
+StartOffset=0
+RowLength=160
