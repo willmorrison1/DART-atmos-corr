@@ -59,3 +59,138 @@ Y[dart] = Z[mw]
 Z[dart] = -Y[mw]
 ```
 
+# Read DART data
+
+```{r}
+library(daRt)
+library(dplyr)
+library(ggplot2)
+print( getwd())
+simDir <- "README_files/DART-simulation/dart-atmos-corr"
+
+sF_trans <- daRt::simulationFilter(product = "images", bands = integer(), iters = "ITERX", 
+                                   imageTypes = c("camera_transmittance"), typeNums = "",
+                                   variables = "Tapp")
+sF_tapp <- sF_trans
+imageTypes(sF_tapp) <- "camera"
+typeNums(sF_tapp) <- "1_Fluid"
+
+simData_trans <- daRt::getData(x = simDir, sF = sF_trans)
+simData_tapp <- daRt::getData(x = simDir, sF = sF_tapp)
+
+simData_rad <- tappToRadiance(simData_tapp)
+
+transDF <- as.data.frame(simData_trans)
+transDF$value[transDF$value == 0] <- NA
+radDF <- as.data.frame(simData_rad)
+radDF$value[radDF$value == 0] <- NA
+
+```
+
+Now plot the data.
+``` {r}
+
+plotThemes <- theme(
+  axis.text = element_blank(),
+  axis.title = element_blank(),
+  axis.ticks = element_blank(), 
+  panel.spacing = unit(0.1, "lines"),
+  strip.text = element_text(size = 5, margin = margin(0, 0, 0, 0)),
+  strip.background = element_rect(fill = "white", margin(0, 0, 0, 0)),
+  aspect.ratio = 120 / 160
+)
+
+ggplot(transDF) +
+  geom_raster(aes(x = x, y = y, fill = value)) +
+  facet_wrap(~ band, ncol = 7) +
+  theme_bw() +
+  plotThemes +
+  coord_flip() +
+  scale_x_reverse() +
+  ggtitle("Atmospheric spectral transmittance")
+
+ggplot(radDF) +
+  geom_raster(aes(x = x, y = y, fill = value)) +
+  facet_wrap(~ band, ncol = 7) +
+  theme_bw() +
+  plotThemes +
+  coord_flip() +
+  scale_x_reverse() +
+  ggtitle("Atmospheric spectral radiance")
+
+```
+
+
+```{r}
+SRF_raw <- data.frame("lambda" = seq(5, 20, by = 1e-5), "value" = seq(0.1, 1, length.out = length(seq(5, 20, by = 1e-5))) * 0.1)
+```
+
+
+simData_trans
+
+```{r}
+SRFinterp <- function(SRF_raw, simData) {
+  
+  require(dplyr)
+  require(imputeTS)
+  
+  sigFig <- 5
+  
+  lambdaCols <- c("lambdamin", "lambdamid", "lambdamax", "equivalentWavelength")
+  wavelengthVals <- wavelengths(simData)
+  wavelengthVals[, lambdaCols] <- round(wavelengthVals[, lambdaCols], sigFig)
+  SRF_raw_edited <- SRF_raw %>%
+    dplyr::mutate(lambda = round(lambda, sigFig)) %>%
+    dplyr::filter(!duplicated(lambda))
+  minMaxPer <- sapply(wavelengthVals[, lambdaCols], function(x) 
+    c(min(x, na.rm = TRUE), max(x, na.rm = TRUE)))
+  minMaxAll <- apply(minMaxPer, 1, function(x) 
+    c(min(x, na.rm = TRUE), max(x, na.rm = TRUE)))
+  lambdaOUTall <- seq(minMaxAll[, 1][1], minMaxAll[, 2][2], by = 1 * 10^-(sigFig))
+  dfOUT <- data.frame(lambda = lambdaOUTall) %>%
+    dplyr::mutate(lambda = round(lambda, sigFig)) %>%
+    dplyr::filter(!duplicated(lambda))
+  
+  
+  lambdaDF <- dfOUT %>% 
+    dplyr::left_join(SRF_raw_edited, by = "lambda") %>%
+    dplyr::mutate(value = imputeTS::na_interpolation(value))
+  
+  wavelengthOut <- wavelengthVals
+  
+  for (lambdaCol in lambdaCols) {
+    lambdaDFout <- lambdaDF
+    colnames(lambdaDFout) <- c(lambdaCol, paste0(lambdaCol, "_SRF"))
+    wavelengthOut <- wavelengthOut %>%
+      dplyr::left_join(lambdaDFout, by = lambdaCol)
+  }
+  
+  wavelengthOutDF <- dplyr::bind_cols(wavelengthOut)
+  #todo - add per-simData
+  return(wavelengthOutDF)
+}
+
+SRFinterpVals <- SRFinterp(SRF_raw = SRF_raw, simData = simData_trans)
+dataDF <- transDF
+#todo - join per-simData
+dataDF <- dataDF %>% 
+  dplyr::left_join(SRFinterpVals, by = c("band"))
+LHS <- dataDF$value * dataDF$lambdamin_SRF + dataDF$value * dataDF$lambdamid_SRF
+#get integrals for RHS of SRF - for each band
+RHS <- dataDF$value * dataDF$lambdamid_SRF + dataDF$value * dataDF$lambdamax_SRF
+integral <- (LHS + RHS) * (dataDF$lambdamax - dataDF$lambdamin) * 0.5
+dataDF$integral <- integral
+
+#hereiam - running this
+dataDF_out <- dataDF %>%
+    dplyr::group_by(x, y, iter, imgType, imageNo, VZ, VA) %>%
+    dplyr::summarise(bandValue = sum(integral))
+
+ggplot(dataDF_out) +
+  geom_raster(aes(x = x, y = y, fill = bandValue)) +
+  theme_bw() +
+  coord_flip() +
+  scale_x_reverse() +
+  ggtitle("Atmospheric band transmittance")
+
+```
