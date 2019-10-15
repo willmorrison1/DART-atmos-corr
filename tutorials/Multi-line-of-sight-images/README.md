@@ -45,6 +45,29 @@ library(raster, sp)
 ## Loading required package: sp
 ```
 
+```
+## 
+## Attaching package: 'raster'
+```
+
+```
+## The following object is masked from 'package:data.table':
+## 
+##     shift
+```
+
+```
+## The following object is masked from 'package:dplyr':
+## 
+##     select
+```
+
+```
+## The following object is masked from 'package:daRt':
+## 
+##     getData
+```
+
 ```r
 plot(raster("README_files/figure-misc/Camera.tiff"), main = "RAW tiff")
 ```
