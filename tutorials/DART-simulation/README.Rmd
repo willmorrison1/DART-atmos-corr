@@ -171,7 +171,7 @@ SRFinterp <- function(SRF_raw, simData, sigFig = 4) {
 }
 #hereiam-not working as expected i think
 SRFinterpVals <- SRFinterp(SRF_raw = SRF_raw, simData = simData_trans)
-dataDF <- transDF
+dataDF <- radDF
 dataDF <- dataDF %>% 
   dplyr::left_join(SRFinterpVals, by = c("band", "simName"))
 LHS <- dataDF$value * dataDF$lambdamin_SRF + dataDF$value * dataDF$lambdamid_SRF
