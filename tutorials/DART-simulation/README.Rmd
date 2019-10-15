@@ -169,7 +169,7 @@ SRFinterp <- function(SRF_raw, simData, sigFig = 4) {
   
   return(wavelengthOutDF)
 }
-#hereiam-not working as expected i think
+#check this band integration with prior implementation (DART_imgInfo())
 SRFinterpVals <- SRFinterp(SRF_raw = SRF_raw, simData = simData_trans)
 dataDF <- radDF
 dataDF <- dataDF %>% 
