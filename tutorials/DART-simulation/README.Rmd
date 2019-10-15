@@ -4,16 +4,29 @@ This tutorial outlines the configuration of the DART model for creation of atmos
 
 # DART model configuration
 
-The DART simulation template can be found [here TO ADD](README_files/).
+The DART simulation template can be found [here](README_files/DART-simulation) and has been tested using hte version shown in the input files xml headers. The settings that should be changed are:
+
+- Advanced mode:
+- cell size 
+- sub-cells
+- sub-faces (per sub-cell)
+- Flux tracking parameters:
+- number and width of bands
+- number and type of cameras
+- Atmosphere:
+- height of earth scene (with air) 
+- WIP 1d temperature profile
+- WIP H2O
+- WIP CO2
+- WIP
 
 ## Import 3D model
 
-Import the 3D model into the DART simulation and put it in the middle of the DART scene.
-
+Import the 3D model that was used in the [model world](../Model-world) section into the DART simulation and put it in the middle of the DART scene.
 
 ## DART camera - location coordinates
 
-For a model world camera with XYZ location
+For a model world camera with XYZ location:
 
 ```
 X[mw] = -28.553
@@ -21,14 +34,14 @@ Y[mw] = -27.9681
 Z[mw] =  87.1
 ```
 
-with the world coordinate origin in the center of the scene, the comparable DART camera coordinates are
+with the world coordinate origin in the center of the scene, the comparable DART camera coordinates are:
 
 ```
 X[dart] = (max(Y[dart]) / 2) + Y[mw]
 Y[dart] = (max(X[dart]) / 2) + X[mw]
 Z[dart] =  Z[mw]
 ```
-becuase the DART world coordinate origin is in the "top left" and the X and Y axes are opposite to that of Blender. 
+becuase the DART world coordinate origin is in the "top left" and the X and Y axes are opposite to that of Blender. For the [model world](../Model-world) camera example, this requires the following calculation:
 
 ``` {r}
 Xdart_max <- Ydart_max <- 300
@@ -37,6 +50,7 @@ Ymw <- -27.9681
 Xdart <- (Xdart_max / 2) + Ymw
 Ydart <- (Ydart_max / 2) + Xmw
 ```
+which gives the following DART coordinates:
 
 ``` {r}
 print(Xdart)
@@ -47,11 +61,11 @@ print(Ydart)
 
 ### Inside scene camera
 
-The DART camera rotation can be directly translated from the Blender coordinates when using the "inside scene" camera. 
+The DART camera rotation can be directly translated from the [model world](../Model-world) Blender coordinates when using the "inside scene" camera. 
 
 ### Frame camera
 
-When using a camera above the tallest model world surface, the "frame camera" should be used. With the Blender rotation order as XZY, set the DART frame camera rotation order to XZY. The Blender camera rotation vector (X[mw]... etc) is related to DART frame camera rotation by: 
+When using a camera that is located above the tallest model world surface, the camera is above the model world and the "frame camera" should be used. With the Blender rotation order as XZY, set the DART frame camera rotation order to XZY. The Blender camera rotation vector (X[mw]... etc) is related to DART frame camera rotation by: 
 
 ```
 X[dart] = X[mw]
@@ -61,7 +75,7 @@ Z[dart] = -Y[mw]
 
 # Read DART data
 
-```{r}
+```{r, warnings = FALSE, message = FALSE}
 library(daRt)
 library(dplyr)
 library(ggplot2)
