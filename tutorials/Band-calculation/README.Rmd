@@ -13,7 +13,6 @@ sF_trans <- daRt::simulationFilter(product = "images", bands = integer(), iters 
 sF_tapp <- sF_trans
 imageTypes(sF_tapp) <- "camera"
 typeNums(sF_tapp) <- "1_Fluid"
-typeNums(sF_tapp) <- "" #TEMP
 
 simData_transAtm <- daRt::getData(x = simDir, sF = sF_trans)
 simData_tappAtm <- daRt::getData(x = simDir, sF = sF_tapp)
@@ -253,15 +252,14 @@ colnames(DARTbandCalcDF) <- c("x", "y", "bandValue_DART")
 SRF <- SRFinterp(SRF_raw = SRF_raw, simData = simData_radAtm)
 radAtmSpectral <- as.data.frame(simData_radAtm) %>%
   dplyr::left_join(wavelengths(simData_radAtm))
-radAtmSpectral$value_tapp <- .planck_inverse(radAtmSpectral$equivalentWavelength, radAtmSpectral$value)
 
 bandRadDF <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
 ggplot(radAtmSpectral %>% 
          filter(value > 0.5) %>% 
          group_by(lambdamid, add = TRUE) %>% 
-         summarise(valMin = quantile(value, 0.05),
+         summarise(valMin = quantile(value, 0.25),
                    valMid = quantile(value, 0.5), 
-                   valMax = quantile(value, 0.95))) +
+                   valMax = quantile(value, 0.75))) +
   geom_ribbon(aes(x = lambdamid, ymin = valMin, ymax = valMax), fill = "red") +
   geom_line(aes(x = lambdamid, y = valMid), colour = "black", size = 0.75)
 

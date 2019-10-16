@@ -14,7 +14,6 @@ sF_trans <- daRt::simulationFilter(product = "images", bands = integer(), iters 
 sF_tapp <- sF_trans
 imageTypes(sF_tapp) <- "camera"
 typeNums(sF_tapp) <- "1_Fluid"
-typeNums(sF_tapp) <- "" #TEMP
 
 simData_transAtm <- daRt::getData(x = simDir, sF = sF_trans)
 simData_tappAtm <- daRt::getData(x = simDir, sF = sF_tapp)
@@ -144,15 +143,13 @@ radAtmSpectral <- as.data.frame(simData_radAtm) %>%
 ```
 
 ```r
-radAtmSpectral$value_tapp <- .planck_inverse(radAtmSpectral$equivalentWavelength, radAtmSpectral$value)
-
 bandRadDF <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
 ggplot(radAtmSpectral %>% 
          filter(value > 0.5) %>% 
          group_by(lambdamid, add = TRUE) %>% 
-         summarise(valMin = quantile(value, 0.05),
+         summarise(valMin = quantile(value, 0.25),
                    valMid = quantile(value, 0.5), 
-                   valMax = quantile(value, 0.95))) +
+                   valMax = quantile(value, 0.75))) +
   geom_ribbon(aes(x = lambdamid, ymin = valMin, ymax = valMax), fill = "red") +
   geom_line(aes(x = lambdamid, y = valMid), colour = "black", size = 0.75)
 ```
@@ -173,7 +170,7 @@ summary(bandRadDF$bandValue[bandRadDF$bandValue > 1])
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    1.16   61.79   62.12   58.82   62.24  145.14
+##   1.000   1.097   1.217   1.424   1.704   2.662
 ```
 
 ```r
