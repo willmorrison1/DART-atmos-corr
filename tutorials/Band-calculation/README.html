@@ -200,7 +200,8 @@ simData_tappAtm &lt;- daRt::getData(x = simDir, sF = sF_tapp)
 simData_radAtm &lt;- daRt::tappToRadiance(simData_tappAtm)
 transDF &lt;- as.data.frame(simData_transAtm)
 radDF &lt;- as.data.frame(simData_radAtm)</code></pre>
-<p><span class="math display">\[\int_{\lambda=1}^{\lambda=n}\approx
+<p>Band calculation trapezoidal approximation:</p>
+<p><span class="math display">\[\int_{\lambda=1}^{\lambda=n} d\lambda~L_\lambda R_\lambda\approx
 \sum_{i=1}^n \frac{1}{2} 
 \times(\lambda_{i_{max}}-\lambda_{i_{min}}) 
 \times (L_{\lambda_{i}}R_{i_{min}} + 
