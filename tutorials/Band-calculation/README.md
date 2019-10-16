@@ -26,6 +26,7 @@ radDF <- as.data.frame(simData_radAtm)
 
 Band calculation trapezoidal approximation:
 
+
 $$\int_{\lambda=1}^{\lambda=n} d\lambda~L_\lambda R_\lambda\approx
 \sum_{i=1}^n \frac{1}{2} \Bigg[
 \Big[\frac{1}{2}
@@ -34,6 +35,7 @@ $$\int_{\lambda=1}^{\lambda=n} d\lambda~L_\lambda R_\lambda\approx
 L_{\lambda_{i}}R_{mid_{i}} + 
 L_{\lambda_{i}}R_{mid_{i}} + 
 L_{\lambda_{i}}R_{max_{i}})\Bigg]$$
+
 
 Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely: pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
 
@@ -174,7 +176,7 @@ summary(bandRadDF$bandValue[bandRadDF$bandValue > 1])
 ```
 
 ```r
-ggplot(bandRadDF %>% filter(between(bandValue, 63.2, 63.4))) +
+ggplot(bandRadDF) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
@@ -185,20 +187,6 @@ ggplot(bandRadDF %>% filter(between(bandValue, 63.2, 63.4))) +
 ![](README_files/figure-markdown_github/unnamed-chunk-9-2.png)
 
 ```r
-hist(bandRadDF$bandValue)
-```
-
-![](README_files/figure-markdown_github/unnamed-chunk-9-3.png)
-
-```r
-print("should be ~63.3 W m2 sr")
-```
-
-```
-## [1] "should be ~63.3 W m2 sr"
-```
-
-```r
 ggplot(DARTbandCalcDF) +
   geom_raster(aes(x = x, y = y, fill = bandValue_DART)) +
   theme_bw() +
@@ -207,7 +195,7 @@ ggplot(DARTbandCalcDF) +
   ggtitle("Atmosphere band radiance")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-9-4.png)
+![](README_files/figure-markdown_github/unnamed-chunk-9-3.png)
 
 ```r
 print("DART is wrong here - validated using spectralcalc.com")
@@ -235,4 +223,4 @@ ggplot(tmp) +
   ggtitle("Atmosphere band radiance")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-9-5.png)
+![](README_files/figure-markdown_github/unnamed-chunk-9-4.png)
