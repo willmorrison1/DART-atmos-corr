@@ -77,7 +77,7 @@ Z[dart] = -Y[mw]
 
 # Read DART data
 
-This section outlines the output data that we are interested in: spectral transmittance and radiance for the air between the surface and camera, seen through the perspective of the camera. The reading of data is done using the [daRt](https://github.com/willmorrison1/daRt) package.
+This section outlines the output data that we are interested in: spectral transmittance and radiance for the air between the surface and camera, as seen through the perspective of the [real world](../Real-world-images) camera. The reading of data is done using the [daRt](https://github.com/willmorrison1/daRt) package.
 
 ```{r, warning = FALSE, message = FALSE}
 library(daRt)
@@ -139,7 +139,7 @@ ggplot(radDF) +
 ```
 
 Now do some simple aggregation of the data and plot the median transmittance (line) and 5th -> 9th percentile (shading) across all pixels.
-```{r, fig.height = 2.5, warning = FALSE, message = FALSE}
+```{r, fig.height = 3, warning = FALSE, message = FALSE}
 transDFsummary <- transDF %>%
   dplyr::group_by(band, imgType, imageNo, simName) %>%
   dplyr::summarise(minValue = quantile(value, 0.05, na.rm = TRUE),

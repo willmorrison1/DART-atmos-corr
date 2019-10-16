@@ -1,4 +1,6 @@
-WIP band integration etc. 
+# Summary 
+
+This section demonstrates methods for correcting [real world](../Real-world-images) thermal images using [DART simulation](../DART-simulation) results. 
 
 ```{r, warning = FALSE, message = FALSE}
 library(daRt)
@@ -59,7 +61,7 @@ SRFinterp <- function(SRF_raw, simData, sigFig = 4) {
   
   SRF_raw$value <- .normalise(SRF_raw$value)
   
-  #todo - check within min and max - hereiam
+  #todo - check within min and max
   
   lambdaCols <- c("lambdamin", "lambdamid", "lambdamax", "equivalentWavelength")
   wavelengthVals <- wavelengths(simData)
@@ -111,14 +113,13 @@ thermographToSpectralRadiance <- function(thermograph, simData) {
 }
 
 bandRadiance_surf <- function(LCam_spectralBrick, simData_transAtm, simData_radAtm, SRF_raw) {
-  
+
   SRF <- SRFinterp(SRF_raw, simData_transAtm)
   
   Lcam_attenuated <- LCam_spectralBrick %>% 
     dplyr::left_join(as.data.frame(simData_transAtm) %>% 
-                       dplyr::mutate(tau = value) %>%
-                       dplyr::select(-value), 
-                     by = c("x", "y", "band", "simName")) %>%
+                       dplyr::rename(tau = value), 
+                     by = c("x", "y", "band", "simName", "imgType", "imageNo")) %>%
     dplyr::mutate(value = value / tau) %>%
     dplyr::select(-tau)
   
@@ -131,8 +132,7 @@ bandRadiance_surf <- function(LCam_spectralBrick, simData_transAtm, simData_radA
                          equivalentWavelength_SRF)), 
                      by = c("band", "simName")) %>%
     dplyr::left_join(as.data.frame(simData_transAtm) %>% 
-                       dplyr::mutate(tau = value) %>%
-                       dplyr::select(-value), 
+                       dplyr::rename(tau = value), 
                      by = c("x", "y", "band", "variable", "iter", "typeNum", 
                             "imgType", "imageNo", "VZ", "VA", "simName", "transmittance")) %>%
     dplyr::mutate(value = value / tau) %>%
@@ -156,7 +156,7 @@ bandRadiance_surf <- function(LCam_spectralBrick, simData_transAtm, simData_radA
 
 
 getBandRadiance <- function(spectralDF, SRF) {
-  
+
   SRFbandvals <- SRF %>% 
     dplyr::select(-c(lambdamin, lambdamid, lambdamax, equivalentWavelength))
   
@@ -175,14 +175,45 @@ getBandRadiance <- function(spectralDF, SRF) {
 
 ```
 
+$$\int_{\lambda=1}^{\lambda=n} d\lambda~L_\lambda R_\lambda\approx
+\sum_{i=1}^n \frac{1}{2} 
+\times(\lambda_{i_{max}}-\lambda_{i_{min}}) 
+\times (L_{\lambda_{i}}R_{i_{min}} + 
+L_{\lambda_{i}}R_{i_{mid}}) + 
+(L_{\lambda_{i}}R_{i_{mid}} + 
+L_{\lambda_{i}}R_{i_{max}})$$
+
+
+Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely, the pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
+
+Todo: make formal `Thermograph` class to check validity and enable relevant methods e.g. spectralRadiance(tapp, simData[opt], lambda[opt]). 
 ```{r, warning = FALSE, message = FALSE}
-DFobs <- expand.grid(x = unique(transDF$x), y = unique(transDF$y), value = 300)
+DFobs <- expand.grid(x = unique(transDF$x), y = unique(transDF$y), value = 300, imgType = "camera", imageNo = 251)
+```
 
-SRF_raw <- data.frame("lambda" = seq(5, 20, by = 1e-3), "value" = seq(1, 1, length.out = length(seq(5, 20, by = 1e-3))))
+The user should also have a spectral response function that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it is linearly interpolated to exactly match the required bands.
 
+```{r, warning = FALSE, message = FALSE}
+SRF_raw <- data.frame("lambda" = seq(5, 20, by = 1e-2), "value" = seq(1, 1, length.out = length(seq(5, 20, by = 1e-2))))
+```
+
+WIP. Tapp to spectral radiance
+
+```{r, warning = FALSE, message = FALSE}
 LcamSpectral <- thermographToSpectralRadiance(thermograph = DFobs, simData = simData_radAtm)
+```
 
-bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral, simData_transAtm = simData_transAtm, simData_radAtm = simData_radAtm, SRF_raw = SRF_raw)
+WIP. Perform band calculation. 
+- Add trapezoidal integration equation. 
+- Tidy up inputs to bandRadiance_surf()? e.g. 
+    - LCam_spectralBrick can be a Thermograph() type object and thermographToSpectralRadiance() can be internal. 
+    - simData_transAtm and simData_radAtm combined?
+
+```{r, warning = FALSE, message = FALSE}
+bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral, 
+                               simData_transAtm = simData_transAtm, 
+                               simData_radAtm = simData_radAtm, 
+                               SRF_raw = SRF_raw)
 
 ```
 

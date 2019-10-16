@@ -90,7 +90,7 @@ Z[dart] = -Y[mw]
 
 # Read DART data
 
-This section outlines the output data that we are interested in: spectral transmittance and radiance for the air between the surface and camera, seen through the perspective of the camera. The reading of data is done using the [daRt](https://github.com/willmorrison1/daRt) package.
+This section outlines the output data that we are interested in: spectral transmittance and radiance for the air between the surface and camera, as seen through the perspective of the [real world](../Real-world-images) camera. The reading of data is done using the [daRt](https://github.com/willmorrison1/daRt) package.
 
 
 ```r
