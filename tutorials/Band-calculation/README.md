@@ -26,16 +26,11 @@ radDF <- as.data.frame(simData_radAtm)
 
 Band calculation trapezoidal approximation:
 
-
 $$\int_{\lambda=1}^{\lambda=n} d\lambda~L_\lambda R_\lambda\approx
 \sum_{i=1}^n \frac{1}{2} \Bigg[
-\Big[\frac{1}{2}
-(\lambda_{max_{i}}-\lambda_{min_{i}}) \Big]
-\times (L_{\lambda_{i}}R_{min_{i}} + 
-L_{\lambda_{i}}R_{mid_{i}} + 
-L_{\lambda_{i}}R_{mid_{i}} + 
-L_{\lambda_{i}}R_{max_{i}})\Bigg]$$
-
+\Big[\frac{1}{2}(\lambda_{max_{i}}-\lambda_{min_{i}}) \Big]
+\times (L_{\lambda_{i}}R_{min_{i}} + L_{\lambda_{i}}R_{mid_{i}} + 
+L_{\lambda_{i}}R_{mid_{i}} + L_{\lambda_{i}}R_{max_{i}})\Bigg]$$
 
 Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely: pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
 
@@ -145,7 +140,7 @@ radAtmSpectral <- as.data.frame(simData_radAtm) %>%
 ```
 
 ```r
-bandRadDF <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
+radAtmBand <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
 ggplot(radAtmSpectral %>% 
          filter(value > 0.5) %>% 
          group_by(lambdamid, add = TRUE) %>% 
@@ -159,24 +154,7 @@ ggplot(radAtmSpectral %>%
 ![](README_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 ```r
-print("should be ~63.3 W m2 sr")
-```
-
-```
-## [1] "should be ~63.3 W m2 sr"
-```
-
-```r
-summary(bandRadDF$bandValue[bandRadDF$bandValue > 1])
-```
-
-```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   1.000   1.097   1.217   1.424   1.704   2.662
-```
-
-```r
-ggplot(bandRadDF) +
+ggplot(radAtmBand) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
@@ -196,31 +174,3 @@ ggplot(DARTbandCalcDF) +
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-9-3.png)
-
-```r
-print("DART is wrong here - validated using spectralcalc.com")
-```
-
-```
-## [1] "DART is wrong here - validated using spectralcalc.com"
-```
-
-```r
-tmp = bandRadDF %>%
-  dplyr::left_join(DARTbandCalcDF)
-```
-
-```
-## Joining, by = c("x", "y")
-```
-
-```r
-ggplot(tmp) +
-  geom_raster(aes(x = x, y = y, fill = bandValue - bandValue_DART)) +
-  theme_bw() +
-  coord_flip() +
-  scale_x_reverse() +
-  ggtitle("Atmosphere band radiance")
-```
-
-![](README_files/figure-markdown_github/unnamed-chunk-9-4.png)
