@@ -13,7 +13,7 @@ sF_trans <- daRt::simulationFilter(product = "images", bands = integer(), iters 
                                    variables = "Tapp")
 sF_tapp <- sF_trans
 imageTypes(sF_tapp) <- "camera"
-typeNums(sF_tapp) <- "1_Fluid"
+typeNums(sF_tapp) <- ""# "1_Fluid"
 
 simData_transAtm <- daRt::getData(x = simDir, sF = sF_trans)
 simData_tappAtm <- daRt::getData(x = simDir, sF = sF_tapp)
@@ -26,7 +26,7 @@ radDF <- as.data.frame(simData_radAtm)
 
 Band calculation trapezoidal approximation:
 
-$$\int_{\lambda=1}^{\lambda=n} d\lambda~L_\lambda R_\lambda\approx\sum_{i=1}^n \frac{1}{2} \Bigg[\Big[\frac{1}{2}(\lambda_{max_{i}}-\lambda_{min_{i}}) \Big]\times (L_{\lambda_{i}}R_{min_{i}} + L_{\lambda_{i}}R_{mid_{i}}+L_{\lambda_{i}}R_{mid_{i}} + L_{\lambda_{i}}R_{max_{i}})\Bigg]$$
+$$\int_{\lambda=1}^{\lambda=n}d\lambda~L_\lambda R_\lambda\approx\sum_{i=1}^n \frac{1}{2} \Bigg[\Big[\frac{1}{2}(\lambda_{max_{i}}-\lambda_{min_{i}}) \Big]\times (L_{\lambda_{i}}R_{min_{i}}+ L_{\lambda_{i}}R_{mid_{i}}+L_{\lambda_{i}}R_{mid_{i}}+L_{\lambda_{i}}R_{max_{i}})\Bigg]$$
 
 Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely: pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
 
@@ -40,7 +40,7 @@ The user should also have a spectral response function that spans the [DART simu
 
 
 ```r
-SRF_raw <- data.frame("lambda" = seq(5, 20, by = 1e-2), "value" = seq(1, 1, length.out = length(seq(5, 20, by = 1e-2))))
+SRF_raw <- read.table("README_files/data/SRF.txt", col.names = c("lambda", "value"))
 ```
 
 WIP. Tapp to spectral radiance
@@ -122,10 +122,9 @@ library(raster)
 ```
 
 ```r
-DARTbandCalc <- raster("README_files/figure-misc/camera_251_VZ=046_6_VA=261_1.tif")
-
-DARTbandCalcDF <- reshape2::melt(as.matrix(DARTbandCalc))
-colnames(DARTbandCalcDF) <- c("x", "y", "bandValue_DART")
+# DARTbandCalc <- raster("README_files/figure-misc/camera_251_VZ=046_6_VA=261_1.tif")
+# DARTbandCalcDF <- reshape2::melt(as.matrix(DARTbandCalc))
+# colnames(DARTbandCalcDF) <- c("x", "y", "bandValue_DART")
 SRF <- SRFinterp(SRF_raw = SRF_raw, simData = simData_radAtm)
 radAtmSpectral <- as.data.frame(simData_radAtm) %>%
   dplyr::left_join(wavelengths(simData_radAtm))
@@ -137,11 +136,12 @@ radAtmSpectral <- as.data.frame(simData_radAtm) %>%
 
 ```r
 radAtmBand <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
+
 ggplot(radAtmSpectral %>% 
          group_by(lambdamid, add = TRUE) %>% 
-         summarise(valMin = quantile(value, 0.25),
+         summarise(valMin = quantile(value, 0.1),
                    valMid = quantile(value, 0.5), 
-                   valMax = quantile(value, 0.75))) +
+                   valMax = quantile(value, 0.9))) +
   geom_ribbon(aes(x = lambdamid, ymin = valMin, ymax = valMax), fill = "red") +
   geom_line(aes(x = lambdamid, y = valMid), colour = "black", size = 0.75)
 ```
@@ -160,12 +160,10 @@ ggplot(radAtmBand) +
 ![](README_files/figure-markdown_github/unnamed-chunk-9-2.png)
 
 ```r
-ggplot(DARTbandCalcDF) +
-  geom_raster(aes(x = x, y = y, fill = bandValue_DART)) +
-  theme_bw() +
-  coord_flip() +
-  scale_x_reverse() +
-  ggtitle("Atmosphere band radiance")
+# ggplot(DARTbandCalcDF) +
+#   geom_raster(aes(x = x, y = y, fill = bandValue_DART)) +
+#   theme_bw() +
+#   coord_flip() +
+#   scale_x_reverse() +
+#   ggtitle("Atmosphere band radiance")
 ```
-
-![](README_files/figure-markdown_github/unnamed-chunk-9-3.png)

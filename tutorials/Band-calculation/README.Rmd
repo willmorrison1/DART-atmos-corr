@@ -12,7 +12,7 @@ sF_trans <- daRt::simulationFilter(product = "images", bands = integer(), iters 
                                    variables = "Tapp")
 sF_tapp <- sF_trans
 imageTypes(sF_tapp) <- "camera"
-typeNums(sF_tapp) <- "1_Fluid"
+typeNums(sF_tapp) <- ""# "1_Fluid"
 
 simData_transAtm <- daRt::getData(x = simDir, sF = sF_trans)
 simData_tappAtm <- daRt::getData(x = simDir, sF = sF_tapp)
@@ -196,7 +196,7 @@ DFobs <- expand.grid(x = unique(transDF$x), y = unique(transDF$y), value = 300, 
 The user should also have a spectral response function that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it will be linearly interpolated to exactly match the required bands.
 
 ```{r, warning = FALSE, message = FALSE}
-SRF_raw <- data.frame("lambda" = seq(5, 20, by = 1e-2), "value" = seq(1, 1, length.out = length(seq(5, 20, by = 1e-2))))
+SRF_raw <- read.table("README_files/data/SRF.txt", col.names = c("lambda", "value"))
 ```
 
 WIP. Tapp to spectral radiance
@@ -249,9 +249,9 @@ radAtmBand <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
 
 ggplot(radAtmSpectral %>% 
          group_by(lambdamid, add = TRUE) %>% 
-         summarise(valMin = quantile(value, 0.25),
+         summarise(valMin = quantile(value, 0.1),
                    valMid = quantile(value, 0.5), 
-                   valMax = quantile(value, 0.75))) +
+                   valMax = quantile(value, 0.9))) +
   geom_ribbon(aes(x = lambdamid, ymin = valMin, ymax = valMax), fill = "red") +
   geom_line(aes(x = lambdamid, y = valMid), colour = "black", size = 0.75)
 
