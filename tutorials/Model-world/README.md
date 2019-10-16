@@ -7,7 +7,7 @@ The 'model world' forms the basis of the three-dimensional (3D) environment used
 
 Given the cameras used here are static, photogrammetry techniques such as structure from motion cannot automatically determine the location and rotation of [real world cameras](../Real-world-images). Therefore, 3D geometry is loaded into the rendering software. Then, real world camera parameters are prescribed to give accurate 'model world' perspectives of the real world cameras.   
 
-In this tutorial, a 'model world' will be created for the [real world camera image example](../Real-world-images). The tutorial has been tested using Blender v2.80 and has the [completed tutorial environment](README_files/geometry/model-world.blend) for reference. The tutorial is not extensive and assumes basic understanding of Blender.
+In this tutorial, a 'model world' will be created for the [real world camera image example](../Real-world-images). The tutorial has been tested using Blender v2.80. The [dataset](README_files/geometry/model-world.blend) containing the completed turorial environment is available for reference. The tutorial is not exhaustive and assumes basic Blender understanding. 
 
 # Geometry
 
@@ -36,9 +36,9 @@ Shift + "a" -> "Camera"
 
 ## Extrinsic parameters
 
-Select the the camera (click on it, top right in "scene collection"), press *n*, then you will see the location and rotation XYZ "transform" parameters window.
+Select the camera (click on it in top right "scene collection" panel), then press *n* and you will see the location and rotation XYZ "transform" parameters window.
 
-Modify these 6 parameters to have X = Y = Z = 150 world coordinates and rotation X = Y = Z = 0 3D vector elements. To view the newly altered geometry through the camera viewport, left click on the central window (the 'user perspective') and press
+Modify these 6 parameters to have X = Y = Z = 150 world coordinates, and X = Y = Z = 0 rotation 3D vector elements. To view the newly altered geometry through the camera viewport, left click on the central window (the 'user perspective') and press
 
 ```
 Crtl + Numpad0
