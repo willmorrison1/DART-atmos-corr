@@ -4,11 +4,27 @@ This tutorial outlines the configuration of the DART model for creation of atmos
 
 # DART model configuration
 
-The DART simulation template can be found [here](README_files/DART-simulation).
+The DART simulation template can be found [here](README_files/DART-simulation) and has been tested using hte version shown in the input files xml headers. The settings that should be changed are:
+
+- Advanced mode:
+    - cell size 
+    - sub-cells
+    - sub-faces (per sub-cell)
+- Flux tracking parameters:
+    - number and width of bands
+    - number and type of cameras
+- Atmosphere:
+    - height of earth scene (with air)
+    - Define water vapor parameters at a point 
+    - altitude
+    - pressure
+    - temperature
+    - RH
+    - distance to calculate reference cross-section
 
 ## Import 3D model
 
-Import the 3D model that was used in the [model world](../Model-world) section into the DART simulation and put it in the middle of the DART scene.
+Import the 3D model. This tutorial uses the one from the [model world](../Model-world) section. When importing, position the 3D model in the middle (horizontally) of the DART scene.
 
 ## DART camera - location coordinates
 
@@ -27,7 +43,7 @@ X[dart] = (max(Y[dart]) / 2) + Y[mw]
 Y[dart] = (max(X[dart]) / 2) + X[mw]
 Z[dart] =  Z[mw]
 ```
-becuase the DART world coordinate origin is in the "top left" and the X and Y axes are opposite to that of Blender. For the [model world](../Model-world) camera example, this requires the following calculation:
+This is becuase the DART world coordinate origin is in the "top left" and the X and Y axes are opposite to that of Blender. For the [model world](../Model-world) camera example, this requires the following calculation:
 
 
 ```r
@@ -74,6 +90,8 @@ Z[dart] = -Y[mw]
 
 # Read DART data
 
+This section outlines the output data that we are interested in: spectral transmittance and radiance for the air between the surface and camera, seen through the perspective of the camera. The reading of data is done using the [daRt](https://github.com/willmorrison1/daRt) package.
+
 
 ```r
 library(daRt)
@@ -91,21 +109,14 @@ typeNums(sF_tapp) <- "1_Fluid"
 simData_transAtm <- daRt::getData(x = simDir, sF = sF_trans)
 simData_tappAtm <- daRt::getData(x = simDir, sF = sF_tapp)
 simData_radAtm <- daRt::tappToRadiance(simData_tappAtm)
-```
 
-```
-## Warning: Column `simName` joining factor and character vector, coercing
-## into character vector
-```
-
-```r
 transDF <- as.data.frame(simData_transAtm)
 transDF$value[transDF$value == 0] <- NA
 radDF <- as.data.frame(simData_radAtm)
 radDF$value[radDF$value == 0] <- NA
 ```
 
-Now plot the data.
+Now plot the data. Plot all raw images.
 
 ```r
 plotThemes <- theme(
@@ -129,7 +140,7 @@ ggplot(transDF) +
   ggtitle("Atmospheric spectral transmittance")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 ```r
 ggplot(radDF) +
@@ -143,5 +154,24 @@ ggplot(radDF) +
   ggtitle("Atmospheric spectral radiance")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
+![](README_files/figure-markdown_github/unnamed-chunk-5-2.png)
+
+Now do some simple aggregation of the data and plot the median transmittance (line) and 5th -> 9th percentile (shading) across all pixels.
+
+```r
+transDFsummary <- transDF %>%
+  dplyr::group_by(band, imgType, imageNo, simName) %>%
+  dplyr::summarise(minValue = quantile(value, 0.05, na.rm = TRUE),
+                   medValue = median(value, na.rm = TRUE),
+                   maxValue = quantile(value, 0.95, na.rm = TRUE))
+
+ggplot(transDFsummary %>% dplyr::left_join(wavelengths(simData_radAtm))) +
+  geom_ribbon(aes(x = lambdamid, ymin = minValue, ymax = maxValue), fill = "grey") +
+  geom_line(aes(x = lambdamid, y = medValue), size = 0.65) +
+  xlab(expression(wavelength~"("*mu*m*")")) +
+  ylab("Transmittance") + 
+  theme_bw()
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
 

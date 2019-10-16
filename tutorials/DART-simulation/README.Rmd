@@ -7,22 +7,24 @@ This tutorial outlines the configuration of the DART model for creation of atmos
 The DART simulation template can be found [here](README_files/DART-simulation) and has been tested using hte version shown in the input files xml headers. The settings that should be changed are:
 
 - Advanced mode:
-- cell size 
-- sub-cells
-- sub-faces (per sub-cell)
+    - cell size 
+    - sub-cells
+    - sub-faces (per sub-cell)
 - Flux tracking parameters:
-- number and width of bands
-- number and type of cameras
+    - number and width of bands
+    - number and type of cameras
 - Atmosphere:
-- height of earth scene (with air) 
-- WIP 1d temperature profile
-- WIP H2O
-- WIP CO2
-- WIP
+    - height of earth scene (with air)
+    - Define water vapor parameters at a point 
+    - altitude
+    - pressure
+    - temperature
+    - RH
+    - distance to calculate reference cross-section
 
 ## Import 3D model
 
-Import the 3D model that was used in the [model world](../Model-world) section into the DART simulation and put it in the middle of the DART scene.
+Import the 3D model. This tutorial uses the one from the [model world](../Model-world) section. When importing, position the 3D model in the middle (horizontally) of the DART scene.
 
 ## DART camera - location coordinates
 
@@ -41,7 +43,7 @@ X[dart] = (max(Y[dart]) / 2) + Y[mw]
 Y[dart] = (max(X[dart]) / 2) + X[mw]
 Z[dart] =  Z[mw]
 ```
-becuase the DART world coordinate origin is in the "top left" and the X and Y axes are opposite to that of Blender. For the [model world](../Model-world) camera example, this requires the following calculation:
+This is becuase the DART world coordinate origin is in the "top left" and the X and Y axes are opposite to that of Blender. For the [model world](../Model-world) camera example, this requires the following calculation:
 
 ``` {r}
 Xdart_max <- Ydart_max <- 300
@@ -75,7 +77,9 @@ Z[dart] = -Y[mw]
 
 # Read DART data
 
-```{r, warnings = FALSE, message = FALSE}
+This section outlines the output data that we are interested in: spectral transmittance and radiance for the air between the surface and camera, seen through the perspective of the camera. The reading of data is done using the [daRt](https://github.com/willmorrison1/daRt) package.
+
+```{r, warning = FALSE, message = FALSE}
 library(daRt)
 library(dplyr)
 library(ggplot2)
@@ -99,8 +103,8 @@ radDF$value[radDF$value == 0] <- NA
 
 ```
 
-Now plot the data.
-``` {r}
+Now plot the data. Plot all raw images.
+``` {r, warning = FALSE, message = FALSE}
 
 plotThemes <- theme(
   axis.text = element_blank(),
@@ -131,6 +135,23 @@ ggplot(radDF) +
   scale_x_reverse(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
   ggtitle("Atmospheric spectral radiance")
+
+```
+
+Now do some simple aggregation of the data and plot the median transmittance (line) and 5th -> 9th percentile (shading) across all pixels.
+```{r, fig.height = 2.5, warning = FALSE, message = FALSE}
+transDFsummary <- transDF %>%
+  dplyr::group_by(band, imgType, imageNo, simName) %>%
+  dplyr::summarise(minValue = quantile(value, 0.05, na.rm = TRUE),
+                   medValue = median(value, na.rm = TRUE),
+                   maxValue = quantile(value, 0.95, na.rm = TRUE))
+
+ggplot(transDFsummary %>% dplyr::left_join(wavelengths(simData_radAtm))) +
+  geom_ribbon(aes(x = lambdamid, ymin = minValue, ymax = maxValue), fill = "grey") +
+  geom_line(aes(x = lambdamid, y = medValue), size = 0.65) +
+  xlab(expression(wavelength~"("*mu*m*")")) +
+  ylab("Transmittance") + 
+  theme_bw()
 
 ```
 

@@ -44,4 +44,4 @@ ggplot(bandRadDF %>% filter(between(bandValue, 130, 150))) +
   ggtitle("Surface-leaving band radiance")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
