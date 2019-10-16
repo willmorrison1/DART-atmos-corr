@@ -14,6 +14,7 @@ sF_trans <- daRt::simulationFilter(product = "images", bands = integer(), iters 
 sF_tapp <- sF_trans
 imageTypes(sF_tapp) <- "camera"
 typeNums(sF_tapp) <- "1_Fluid"
+typeNums(sF_tapp) <- "" #TEMP
 
 simData_transAtm <- daRt::getData(x = simDir, sF = sF_trans)
 simData_tappAtm <- daRt::getData(x = simDir, sF = sF_tapp)
@@ -113,7 +114,7 @@ thermographToSpectralRadiance <- function(thermograph, simData) {
 }
 
 bandRadiance_surf <- function(LCam_spectralBrick, simData_transAtm, simData_radAtm, SRF_raw) {
-
+  
   SRF <- SRFinterp(SRF_raw, simData_transAtm)
   
   Lcam_attenuated <- LCam_spectralBrick %>% 
@@ -156,44 +157,44 @@ bandRadiance_surf <- function(LCam_spectralBrick, simData_transAtm, simData_radA
 
 
 getBandRadiance <- function(spectralDF, SRF) {
-
+  
   SRFbandvals <- SRF %>% 
     dplyr::select(-c(lambdamin, lambdamid, lambdamax, equivalentWavelength))
   
   spectralDFintegrals <- spectralDF %>%
     dplyr::left_join(SRFbandvals, 
                      by = c("band", "simName")) %>%
-    dplyr::mutate(deltaLambda = lambdamax - lambdamin,
+    dplyr::mutate(deltaLambda = (lambdamax - lambdamin) * 0.5,
                   LHS = value * lambdamin_SRF + value * lambdamid_SRF,
                   RHS = value * lambdamid_SRF + value * lambdamax_SRF,
                   integral = (LHS + RHS) * deltaLambda * 0.5) %>%
-    dplyr::group_by(x, y, iter, imgType, imageNo, VZ, VA) %>%
+    dplyr::group_by(x, y, iter, typeNum, imgType, imageNo, VZ, VA, simName) %>%
     dplyr::summarise(bandValue = sum(integral, na.rm = TRUE))
   
   return(spectralDFintegrals)
 }
 
 ```
-
+ 
 Band calculation trapezoidal approximation:
 
 $$\int_{\lambda=1}^{\lambda=n} d\lambda~L_\lambda R_\lambda\approx
-\sum_{i=1}^n \frac{1}{2} 
-\times(\lambda_{max_{i}}-\lambda_{min_{i}}) 
+\sum_{i=1}^n \frac{1}{2} \Bigg[
+\Big[\frac{1}{2}
+(\lambda_{max_{i}}-\lambda_{min_{i}}) \Big]
 \times (L_{\lambda_{i}}R_{min_{i}} + 
-L_{\lambda_{i}}R_{mid_{i}}) + 
-(L_{\lambda_{i}}R_{mid_{i}} + 
-L_{\lambda_{i}}R_{max_{i}})$$
+L_{\lambda_{i}}R_{mid_{i}} + 
+L_{\lambda_{i}}R_{mid_{i}} + 
+L_{\lambda_{i}}R_{max_{i}})\Bigg]$$
 
-
-Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely, the pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
+Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely: pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
 
 Todo: make formal `Thermograph` class to check validity and enable relevant methods e.g. spectralRadiance(tapp, simData[opt], lambda[opt]). 
 ```{r, warning = FALSE, message = FALSE}
 DFobs <- expand.grid(x = unique(transDF$x), y = unique(transDF$y), value = 300, imgType = "camera", imageNo = 251)
 ```
 
-The user should also have a spectral response function that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it is linearly interpolated to exactly match the required bands.
+The user should also have a spectral response function that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it will be linearly interpolated to exactly match the required bands.
 
 ```{r, warning = FALSE, message = FALSE}
 SRF_raw <- data.frame("lambda" = seq(5, 20, by = 1e-2), "value" = seq(1, 1, length.out = length(seq(5, 20, by = 1e-2))))
@@ -206,10 +207,11 @@ LcamSpectral <- thermographToSpectralRadiance(thermograph = DFobs, simData = sim
 ```
 
 WIP. Perform band calculation. 
-- Add trapezoidal integration equation. 
 - Tidy up inputs to bandRadiance_surf()? e.g. 
-    - LCam_spectralBrick can be a Thermograph() type object and thermographToSpectralRadiance() can be internal. 
-    - simData_transAtm and simData_radAtm combined?
+- LCam_spectralBrick check is a valid data frame 
+- thermographToSpectralRadiance() can be internal. 
+- simData_transAtm and simData_radAtm combined?
+- validate with DART bandradiance.py
 
 ```{r, warning = FALSE, message = FALSE}
 bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral, 
@@ -217,10 +219,11 @@ bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral,
                                simData_radAtm = simData_radAtm, 
                                SRF_raw = SRF_raw)
 
+
 ```
 
 ```{r}
-ggplot(bandRadDF %>% filter(between(bandValue, 130, 150))) +
+ggplot(bandRadDF) + # %>% filter(between(bandValue, 130, 150))
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
@@ -228,3 +231,44 @@ ggplot(bandRadDF %>% filter(between(bandValue, 130, 150))) +
   ggtitle("Surface-leaving band radiance")
 
 ```
+
+### DART band calc
+
+The daRt band calculation methods have been validated with those provided by the DART team. These methods are incompatible with the complete correction of real world images, but allow for the band calculation of simulated images.  A bash script (BandCalc.sh) performs the band calculation using the DART method. It should be modified based on your python version (3.X) and any further requirements.
+
+```{r}
+library(raster)
+
+DARTbandCalc <- raster("README_files/figure-misc/camera_251_VZ=046_6_VA=261_1.tif")
+
+DARTbandCalcDF <- reshape2::melt(as.matrix(DARTbandCalc))
+colnames(DARTbandCalcDF) <- c("x", "y", "bandValue_DART")
+SRF <- SRFinterp(SRF_raw = SRF_raw, simData = simData_radAtm)
+radAtmSpectral <- as.data.frame(simData_radAtm) %>%
+  dplyr::left_join(wavelengths(simData_radAtm))
+
+bandRadDF <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
+
+ggplot(bandRadDF) +
+  geom_raster(aes(x = x, y = y, fill = bandValue)) +
+  theme_bw() +
+  coord_flip() +
+  scale_x_reverse() +
+  ggtitle("Atmosphere band radiance")
+
+ggplot(DARTbandCalcDF) +
+  geom_raster(aes(x = x, y = y, fill = bandValue_DART)) +
+  theme_bw() +
+  coord_flip() +
+  scale_x_reverse() +
+  ggtitle("Atmosphere band radiance")
+
+tmp = bandRadDF %>%
+  dplyr::left_join(DARTbandCalcDF)
+
+ggplot(tmp) +
+  geom_raster(aes(x = x, y = y, fill = bandValue - bandValue_DART)) +
+  theme_bw() +
+  coord_flip() +
+  scale_x_reverse() +
+  ggtitle("Atmosphere band radiance")

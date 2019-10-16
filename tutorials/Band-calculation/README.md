@@ -15,6 +15,7 @@ sF_trans <- daRt::simulationFilter(product = "images", bands = integer(), iters 
 sF_tapp <- sF_trans
 imageTypes(sF_tapp) <- "camera"
 typeNums(sF_tapp) <- "1_Fluid"
+typeNums(sF_tapp) <- "" #TEMP
 
 simData_transAtm <- daRt::getData(x = simDir, sF = sF_trans)
 simData_tappAtm <- daRt::getData(x = simDir, sF = sF_tapp)
@@ -24,19 +25,19 @@ radDF <- as.data.frame(simData_radAtm)
 ```
 
 
-
+ 
 Band calculation trapezoidal approximation:
 
 $$\int_{\lambda=1}^{\lambda=n} d\lambda~L_\lambda R_\lambda\approx
-\sum_{i=1}^n \frac{1}{2} 
-\times(\lambda_{max_{i}}-\lambda_{min_{i}}) 
+\sum_{i=1}^n \frac{1}{2} \Bigg[
+\Big[\frac{1}{2}
+(\lambda_{max_{i}}-\lambda_{min_{i}}) \Big]
 \times (L_{\lambda_{i}}R_{min_{i}} + 
-L_{\lambda_{i}}R_{mid_{i}}) + 
-(L_{\lambda_{i}}R_{mid_{i}} + 
-L_{\lambda_{i}}R_{max_{i}})$$
+L_{\lambda_{i}}R_{mid_{i}} + 
+L_{\lambda_{i}}R_{mid_{i}} + 
+L_{\lambda_{i}}R_{max_{i}})\Bigg]$$
 
-
-Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely, the pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
+Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely: pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
 
 Todo: make formal `Thermograph` class to check validity and enable relevant methods e.g. spectralRadiance(tapp, simData[opt], lambda[opt]). 
 
@@ -44,7 +45,7 @@ Todo: make formal `Thermograph` class to check validity and enable relevant meth
 DFobs <- expand.grid(x = unique(transDF$x), y = unique(transDF$y), value = 300, imgType = "camera", imageNo = 251)
 ```
 
-The user should also have a spectral response function that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it is linearly interpolated to exactly match the required bands.
+The user should also have a spectral response function that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it will be linearly interpolated to exactly match the required bands.
 
 
 ```r
@@ -59,10 +60,11 @@ LcamSpectral <- thermographToSpectralRadiance(thermograph = DFobs, simData = sim
 ```
 
 WIP. Perform band calculation. 
-- Add trapezoidal integration equation. 
 - Tidy up inputs to bandRadiance_surf()? e.g. 
-    - LCam_spectralBrick can be a Thermograph() type object and thermographToSpectralRadiance() can be internal. 
-    - simData_transAtm and simData_radAtm combined?
+- LCam_spectralBrick check is a valid data frame 
+- thermographToSpectralRadiance() can be internal. 
+- simData_transAtm and simData_radAtm combined?
+- validate with DART bandradiance.py
 
 
 ```r
@@ -74,7 +76,7 @@ bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral,
 
 
 ```r
-ggplot(bandRadDF %>% filter(between(bandValue, 130, 150))) +
+ggplot(bandRadDF) + # %>% filter(between(bandValue, 130, 150))
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
@@ -83,3 +85,105 @@ ggplot(bandRadDF %>% filter(between(bandValue, 130, 150))) +
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-8-1.png)
+
+### DART band calc
+
+The daRt band calculation methods have been validated with those provided by the DART team. These methods are incompatible with the complete correction of real world images, but allow for the band calculation of simulated images.  A bash script (BandCalc.sh) performs the band calculation using the DART method. It should be modified based on your python version (3.X) and any further requirements.
+
+
+```r
+library(raster)
+```
+
+```
+## Warning: package 'raster' was built under R version 3.4.4
+```
+
+```
+## Loading required package: sp
+```
+
+```
+## Warning: package 'sp' was built under R version 3.4.4
+```
+
+```
+## 
+## Attaching package: 'raster'
+```
+
+```
+## The following object is masked from 'package:data.table':
+## 
+##     shift
+```
+
+```
+## The following object is masked from 'package:dplyr':
+## 
+##     select
+```
+
+```
+## The following object is masked from 'package:daRt':
+## 
+##     getData
+```
+
+```r
+DARTbandCalc <- raster("README_files/figure-misc/camera_251_VZ=046_6_VA=261_1.tif")
+
+DARTbandCalcDF <- reshape2::melt(as.matrix(DARTbandCalc))
+colnames(DARTbandCalcDF) <- c("x", "y", "bandValue_DART")
+SRF <- SRFinterp(SRF_raw = SRF_raw, simData = simData_radAtm)
+radAtmSpectral <- as.data.frame(simData_radAtm) %>%
+  dplyr::left_join(wavelengths(simData_radAtm))
+```
+
+```
+## Joining, by = c("band", "simName")
+```
+
+```r
+bandRadDF <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
+
+ggplot(bandRadDF) +
+  geom_raster(aes(x = x, y = y, fill = bandValue)) +
+  theme_bw() +
+  coord_flip() +
+  scale_x_reverse() +
+  ggtitle("Atmosphere band radiance")
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-9-1.png)
+
+```r
+ggplot(DARTbandCalcDF) +
+  geom_raster(aes(x = x, y = y, fill = bandValue_DART)) +
+  theme_bw() +
+  coord_flip() +
+  scale_x_reverse() +
+  ggtitle("Atmosphere band radiance")
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-9-2.png)
+
+```r
+tmp = bandRadDF %>%
+  dplyr::left_join(DARTbandCalcDF)
+```
+
+```
+## Joining, by = c("x", "y")
+```
+
+```r
+ggplot(tmp) +
+  geom_raster(aes(x = x, y = y, fill = bandValue - bandValue_DART)) +
+  theme_bw() +
+  coord_flip() +
+  scale_x_reverse() +
+  ggtitle("Atmosphere band radiance")
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-9-3.png)
