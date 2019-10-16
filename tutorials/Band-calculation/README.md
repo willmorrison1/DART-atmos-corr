@@ -8,7 +8,6 @@ library(daRt)
 library(dplyr)
 library(ggplot2)
 simDir <- "../../tutorials/DART-simulation/README_files/DART-simulation/dart-atmos-corr"
-
 sF_trans <- daRt::simulationFilter(product = "images", bands = integer(), iters = "ITERX", 
                                    imageTypes = c("camera_transmittance"), typeNums = "",
                                    variables = "Tapp")
@@ -25,7 +24,7 @@ radDF <- as.data.frame(simData_radAtm)
 ```
 
 
- 
+
 Band calculation trapezoidal approximation:
 
 $$\int_{\lambda=1}^{\lambda=n} d\lambda~L_\lambda R_\lambda\approx
@@ -145,8 +144,27 @@ radAtmSpectral <- as.data.frame(simData_radAtm) %>%
 ```
 
 ```r
+radAtmSpectral$value_tapp <- .planck_inverse(radAtmSpectral$equivalentWavelength, radAtmSpectral$value)
+
 bandRadDF <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
 
+print("should be ~70 W m2 sr")
+```
+
+```
+## [1] "should be ~70 W m2 sr"
+```
+
+```r
+summary(bandRadDF$bandValue[bandRadDF$bandValue > 1])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.023  63.301  63.301  62.722  63.301 148.710
+```
+
+```r
 ggplot(bandRadDF) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
@@ -158,6 +176,12 @@ ggplot(bandRadDF) +
 ![](README_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 ```r
+hist(bandRadDF$bandValue)
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-9-2.png)
+
+```r
 ggplot(DARTbandCalcDF) +
   geom_raster(aes(x = x, y = y, fill = bandValue_DART)) +
   theme_bw() +
@@ -166,7 +190,7 @@ ggplot(DARTbandCalcDF) +
   ggtitle("Atmosphere band radiance")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-9-2.png)
+![](README_files/figure-markdown_github/unnamed-chunk-9-3.png)
 
 ```r
 tmp = bandRadDF %>%
@@ -186,4 +210,4 @@ ggplot(tmp) +
   ggtitle("Atmosphere band radiance")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-9-3.png)
+![](README_files/figure-markdown_github/unnamed-chunk-9-4.png)

@@ -1,5 +1,5 @@
 Version 5.7.5 (2019/08/29 v1141)
-Fri Oct 11 15:34:47 2019
+Wed Oct 16 17:39:54 2019
 
 * Earth scene: Number of cells (X, Y, Z)  _______________ * 30 30 11
 * Earth scene: Size of elementary cells (X, Y, Z, meters) * 10.000000 10.000000 10.000000
@@ -138,4 +138,4 @@ Level	Iteration	Albedo / Temp	Extrapol. A / T	Exitance (W/m2/micron) (per spectr
 * band 34: energy that has gone underground [W/m2(scene)/micron] * 0.000000
 
 * Memory usage (GB) * 0.000
-* Processing time (hours, minutes, seconds)  * 0 2 59
+* Processing time (hours, minutes, seconds)  * 0 4 3

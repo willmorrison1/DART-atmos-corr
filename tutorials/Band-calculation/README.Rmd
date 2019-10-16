@@ -7,7 +7,6 @@ library(daRt)
 library(dplyr)
 library(ggplot2)
 simDir <- "../../tutorials/DART-simulation/README_files/DART-simulation/dart-atmos-corr"
-
 sF_trans <- daRt::simulationFilter(product = "images", bands = integer(), iters = "ITERX", 
                                    imageTypes = c("camera_transmittance"), typeNums = "",
                                    variables = "Tapp")
@@ -174,8 +173,16 @@ getBandRadiance <- function(spectralDF, SRF) {
   return(spectralDFintegrals)
 }
 
+.planck_inverse <- function(lam, specRad){
+  c1 <- 1.191042e8
+  c2 <- 1.4387752e4
+  
+  return(c2 / 
+           (lam * log(c1 / (lam^5 * specRad) + 1)))
+  
+}
 ```
- 
+
 Band calculation trapezoidal approximation:
 
 $$\int_{\lambda=1}^{\lambda=n} d\lambda~L_\lambda R_\lambda\approx
@@ -246,22 +253,36 @@ colnames(DARTbandCalcDF) <- c("x", "y", "bandValue_DART")
 SRF <- SRFinterp(SRF_raw = SRF_raw, simData = simData_radAtm)
 radAtmSpectral <- as.data.frame(simData_radAtm) %>%
   dplyr::left_join(wavelengths(simData_radAtm))
+radAtmSpectral$value_tapp <- .planck_inverse(radAtmSpectral$equivalentWavelength, radAtmSpectral$value)
 
 bandRadDF <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
+ggplot(radAtmSpectral %>% 
+         filter(value > 0.5) %>% 
+         group_by(lambdamid, add = TRUE) %>% 
+         summarise(valMin = quantile(value, 0.05),
+                   valMid = quantile(value, 0.5), 
+                   valMax = quantile(value, 0.95))) +
+  geom_ribbon(aes(x = lambdamid, ymin = valMin, ymax = valMax), fill = "red") +
+  geom_line(aes(x = lambdamid, y = valMid), colour = "black", size = 0.75)
 
-ggplot(bandRadDF) +
+print("should be ~63.3 W m2 sr")
+summary(bandRadDF$bandValue[bandRadDF$bandValue > 1])
+ggplot(bandRadDF %>% filter(between(bandValue, 63.2, 63.4))) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
   scale_x_reverse() +
   ggtitle("Atmosphere band radiance")
 
+hist(bandRadDF$bandValue)
+print("should be ~63.3 W m2 sr")
 ggplot(DARTbandCalcDF) +
   geom_raster(aes(x = x, y = y, fill = bandValue_DART)) +
   theme_bw() +
   coord_flip() +
   scale_x_reverse() +
   ggtitle("Atmosphere band radiance")
+print("DART is wrong here - validated using spectralcalc.com")
 
 tmp = bandRadDF %>%
   dplyr::left_join(DARTbandCalcDF)
@@ -272,3 +293,4 @@ ggplot(tmp) +
   coord_flip() +
   scale_x_reverse() +
   ggtitle("Atmosphere band radiance")
+```

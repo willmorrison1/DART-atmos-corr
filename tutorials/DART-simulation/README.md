@@ -4,7 +4,7 @@ This tutorial outlines the configuration of the DART model for creation of atmos
 
 # DART model configuration
 
-The DART simulation template can be found [here](README_files/DART-simulation) and has been tested using the version shown in the input files xml headers. The settings that should be changed are:
+The DART simulation template can be found [here](README_files/DART-simulation) and has been tested using hte version shown in the input files xml headers. The settings that should be changed are:
 
 - Advanced mode:
     - cell size 
