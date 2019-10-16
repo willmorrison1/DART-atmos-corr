@@ -147,12 +147,24 @@ radAtmSpectral <- as.data.frame(simData_radAtm) %>%
 radAtmSpectral$value_tapp <- .planck_inverse(radAtmSpectral$equivalentWavelength, radAtmSpectral$value)
 
 bandRadDF <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
+ggplot(radAtmSpectral %>% 
+         filter(value > 0.5) %>% 
+         group_by(lambdamid, add = TRUE) %>% 
+         summarise(valMin = quantile(value, 0.05),
+                   valMid = quantile(value, 0.5), 
+                   valMax = quantile(value, 0.95))) +
+  geom_ribbon(aes(x = lambdamid, ymin = valMin, ymax = valMax), fill = "red") +
+  geom_line(aes(x = lambdamid, y = valMid), colour = "black", size = 0.75)
+```
 
-print("should be ~70 W m2 sr")
+![](README_files/figure-markdown_github/unnamed-chunk-9-1.png)
+
+```r
+print("should be ~63.3 W m2 sr")
 ```
 
 ```
-## [1] "should be ~70 W m2 sr"
+## [1] "should be ~63.3 W m2 sr"
 ```
 
 ```r
@@ -161,11 +173,11 @@ summary(bandRadDF$bandValue[bandRadDF$bandValue > 1])
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   1.023  63.301  63.301  62.722  63.301 148.710
+##    1.16   61.79   62.12   58.82   62.24  145.14
 ```
 
 ```r
-ggplot(bandRadDF) +
+ggplot(bandRadDF %>% filter(between(bandValue, 63.2, 63.4))) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
@@ -173,13 +185,21 @@ ggplot(bandRadDF) +
   ggtitle("Atmosphere band radiance")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-9-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-9-2.png)
 
 ```r
 hist(bandRadDF$bandValue)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-9-2.png)
+![](README_files/figure-markdown_github/unnamed-chunk-9-3.png)
+
+```r
+print("should be ~63.3 W m2 sr")
+```
+
+```
+## [1] "should be ~63.3 W m2 sr"
+```
 
 ```r
 ggplot(DARTbandCalcDF) +
@@ -190,7 +210,15 @@ ggplot(DARTbandCalcDF) +
   ggtitle("Atmosphere band radiance")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-9-3.png)
+![](README_files/figure-markdown_github/unnamed-chunk-9-4.png)
+
+```r
+print("DART is wrong here - validated using spectralcalc.com")
+```
+
+```
+## [1] "DART is wrong here - validated using spectralcalc.com"
+```
 
 ```r
 tmp = bandRadDF %>%
@@ -210,4 +238,4 @@ ggplot(tmp) +
   ggtitle("Atmosphere band radiance")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-9-4.png)
+![](README_files/figure-markdown_github/unnamed-chunk-9-5.png)
