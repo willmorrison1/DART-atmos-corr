@@ -93,14 +93,14 @@ bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral,
 and plot the corrected surface-leaving band radiance (cf. uncorrected at-sensor band radiance).
 
 ```r
-ggplot(bandRadDF %>% filter(between(bandValue, 48, 75))) +
+ggplot(bandRadDF %>% filter(between(bandValue, 45, 85))) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
   scale_x_reverse() +
   ggtitle("At-sensor surface leaving band radiance") +
   labs(fill = expression(italic(L)~"(W m"^"-2"~sr^-1~mu*m^"-1")) +
-  theme(aspect.ratio = 120/160)
+  theme(aspect.ratio = 120 / 160)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->

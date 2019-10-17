@@ -36,13 +36,13 @@ SRFinterp <- function(SRF_raw, simData, sigFig = 4) {
     dplyr::filter(between(lambda, min(wavelengthVals$lambdamin), 
                           max(wavelengthVals$lambdamax)))
   if (nrow(SRF_raw) == 0) stop("SRF outside bandwidth")
+  SRF_raw$value <- .normalise(SRF_raw$value)
   minMaxVals <- data.frame(lambda = c(max(wavelengthVals$lambdamin) - 0.01,
                                       max(wavelengthVals$lambdamin) + 0.01,
                                       0, 100),
                            value = c(0, 0, 0, 0))
   SRF_raw <- rbind(SRF_raw, minMaxVals)
-  SRF_raw$value <- .normalise(SRF_raw$value)
-  SRF_raw<- SRF_raw[order(SRF_raw$lambda),]
+  SRF_raw <- SRF_raw[order(SRF_raw$lambda),]
   
   lambdaCols <- c("lambdamin", "lambdamid", "lambdamax", "equivalentWavelength")
   
