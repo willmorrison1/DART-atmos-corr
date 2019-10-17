@@ -122,7 +122,7 @@ diffDF <- bandRadDF %>%
 ```
 
 ```
-## Joining, by = c("x", "y", "iter", "typeNum", "imgType", "imageNo", "VZ", "VA", "simName", "bandValue_Latm")
+## Joining, by = c("typeNum.x", "x", "y", "iter", "imgType", "imageNo", "VZ", "VA", "simName", "typeNum.y", "bandValue_Latm")
 ```
 
 ```r

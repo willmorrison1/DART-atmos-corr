@@ -123,12 +123,13 @@ bandRadiance_surf <- function(LCam_spectralBrick, simData_transAtm, simData_radA
   Latm_bandRad <- getBandRadiance(spectralDF = Latm_attenuated, 
                                   SRF = SRF)
   
-  OUTdf <- Lcam_bandRad %>%
+  OUTdf <- Lcam_bandRad %>% 
+    dplyr::select(-typeNum) %>% 
     dplyr::left_join(
       Latm_bandRad %>%
         dplyr::mutate(bandValue_Latm = bandValue) %>%
-        dplyr::select(-bandValue),
-      by = c("x", "y", "iter", "imgType", "imageNo", "VZ", "VA", "typeNum", "simName")) %>%
+        dplyr::select(-c(bandValue, typeNum)),
+      by = c("x", "y", "iter", "imgType", "imageNo", "VZ", "VA", "simName")) %>%
     dplyr::mutate(bandValue = bandValue - bandValue_Latm)
   
   return(OUTdf)
