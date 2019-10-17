@@ -17,7 +17,7 @@ dataDF <- melt(as.matrix(rawData), varnames = c("x", "y"))
 
 ggplot(dataDF) +
   geom_raster(aes(x = x, y = y, fill = value)) +
-    coord_flip() +
+  coord_flip() +
   scale_x_reverse()
 ```
 

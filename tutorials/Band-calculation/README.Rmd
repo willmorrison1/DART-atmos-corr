@@ -67,7 +67,7 @@ The band calculations use a trapezoidal approximation:
 ![bandCalcApproximation](README_files/figure-misc/Tex2Img.png)
 
 
-where R is the spectral response function, lambda is wavelength, _L_ is the radiance, _i_ is the band index, _n_ is the number of bands, and subscript _min_ _mid_ _max_ refer to the minimum, central and maximum wavelength for each DART simulation band. DART computes the average optical properties across each band, and uses the central wavelength (i.e. it does no integration across the full band width during simulation). 
+where _R_ is the spectral response function, lambda is wavelength, _L_ is the radiance, _i_ is the band index, _n_ is the number of bands, and subscript _min_ _mid_ _max_ refer to the minimum, central and maximum wavelength for each DART simulation band. DART computes the average optical properties across each band, and uses the central wavelength (i.e. it does no integration across the full band width during simulation). 
 
 Convert the observations into spectral radiances across the wavelengths within the simulation.
 
@@ -87,7 +87,7 @@ bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral,
 
 and plot the corrected surface-leaving band radiance (cf. uncorrected at-sensor band radiance).
 ```{r}
-ggplot(bandRadDF %>% filter(between(bandValue, 48, 52))) +
+ggplot(bandRadDF %>% filter(between(bandValue, 48, 75))) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
