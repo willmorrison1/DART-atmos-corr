@@ -106,13 +106,19 @@ ggplot(bandRadDF %>% filter(between(bandValue, 30, 85))) +
   labs(fill = expression(italic(L)~"(W m"^"-2"~sr^-1~mu*m^"-1")) +
   theme(aspect.ratio = 120 / 160) +
   theme(legend.position = "bottom")
+```
 
+# Correction magnitude
+
+The correction magnitude is calculated here for band radiance. Steps to convert band radiance to temperature are noted.
+
+```{r}
 diffDF <- bandRadDF %>% 
   dplyr::rename(bandValueAtm = bandValue) %>%
   dplyr::left_join(bandRadDF_noAtm)
 
 ggplot(diffDF %>% 
-         filter(between(bandValueAtm - bandValue, 0, 3.5))) +
+         filter(between(bandValueAtm - bandValue, 0.25, 3.25))) +
   geom_raster(aes(x = x, y = y, fill = bandValueAtm - bandValue)) +
   theme_bw() +
   coord_flip() +

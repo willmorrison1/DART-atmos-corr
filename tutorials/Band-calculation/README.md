@@ -129,7 +129,7 @@ diffDF <- bandRadDF %>%
 
 ```r
 ggplot(diffDF %>% 
-         filter(between(bandValueAtm - bandValue, 0, 3.5))) +
+         filter(between(bandValueAtm - bandValue, 0.25, 3.25))) +
   geom_raster(aes(x = x, y = y, fill = bandValueAtm - bandValue)) +
   theme_bw() +
   coord_flip() +
