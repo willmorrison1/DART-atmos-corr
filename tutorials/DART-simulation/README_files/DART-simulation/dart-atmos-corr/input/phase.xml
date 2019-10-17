@@ -221,7 +221,7 @@
                     <BrfProductsProperties brfProduct="0"
                         centralizedBrfProduct="0" extrapolation="0"
                         horizontalOversampling="1" image="1"
-                        luminanceProducts="0" maximalThetaImages="1"
+                        luminanceProducts="1" maximalThetaImages="1"
                         nb_scene="1" pixelToSceneCorrespondences="0"
                         projection="0" sensorOversampling="1"
                         sensorPlaneprojection="1" transmittanceImages="1">
@@ -239,7 +239,7 @@
         <SensorImageSimulation importMultipleSensors="0">
             <InsideSensor sensorConfiguration="0">
                 <InsideSensorConfiguration nbSceneRepetition="1">
-                    <SensorCentralPosition sensorPosX="122.0319"
+                    <SensorCentralPosition sensorPosX="177.96"
                         sensorPosY="121.447" sensorPosZ="87.1"/>
                     <SensorView viewDefinition="2">
                         <CameraOrientYPR pitch="33.404" roll="79.684"
@@ -247,9 +247,9 @@
                     </SensorView>
                 </InsideSensorConfiguration>
                 <Image>
-                    <SensorDimensions height="0.036" width="0.048"/>
+                    <SensorDimensions height="0.03" width="0.04"/>
                     <ImageResolution nbPixelsHeight="120" nbPixelsWidth="160"/>
-                    <FocaleDistance focaleDistance="0.0329"/>
+                    <FocaleDistance focaleDistance="0.0293"/>
                     <SensorOrientation tethaOrientation="0.0"/>
                 </Image>
             </InsideSensor>

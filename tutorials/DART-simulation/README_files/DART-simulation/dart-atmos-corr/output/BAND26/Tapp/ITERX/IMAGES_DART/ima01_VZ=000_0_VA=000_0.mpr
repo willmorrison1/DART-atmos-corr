@@ -10,7 +10,7 @@ Domain=value.dom
 DomainInfo=value.dom;Long;value;0;-9999999.9:9999999.9:0.1:offset=0;
 Range=-1e+300:1e+300:0.000000:offset=0
 Type=Map
-MinMax=298.94:302.54
+MinMax=299.113:301.917
 
 [Map]
 GeoRef=ima01_VZ=000_0_VA=000_0.grf

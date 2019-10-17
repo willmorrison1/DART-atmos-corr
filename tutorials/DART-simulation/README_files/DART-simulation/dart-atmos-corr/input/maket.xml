@@ -2,7 +2,7 @@
 <DartFile build="v1141" version="5.7.5">
     <Maket dartZone="0" exactlyPeriodicScene="0" useRandomGenerationSeed="0">
         <Scene>
-            <CellDimensions x="10" z="10"/>
+            <CellDimensions x="10" z="5"/>
             <SceneDimensions x="300" y="300"/>
         </Scene>
         <RandomGenerationParameters generationSeed="1212245666"/>
