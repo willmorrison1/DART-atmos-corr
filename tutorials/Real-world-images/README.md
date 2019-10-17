@@ -4,7 +4,7 @@ This atmospheric correction procedure is shown for ground-based thermal camera o
 
 # Sample image
 
-The observations shown here are from an Optris PI-160 thermal camera. It is sensitive to radiation between 7 - 14 microns. Observations were taken on top of a high rise building in central London and have an oblique view of the surfaces below. The [sample image](README_files/data/C17_sampleImg.tif) used for this - and later - tutorials was taken around midday on 27th August 2017.
+The observations shown here are from an Optris PI-160 thermal camera. It is sensitive to radiation between 7 - 14 microns. Observations were taken on top of a high rise building in central London and have an oblique view of the surfaces below. The [sample image](README_files/data/C17_sampleImg.tif) used for this (and a later) tutorial was taken around midday on 27th August 2017.
 
 
 ```r
@@ -14,11 +14,12 @@ library(dplyr)
 library(tidyr)
 library(raster)
 rawData <- raster("README_files/data/C17_sampleImg.tif")
-dataDF <- melt(as.matrix(rawData), varnames = c("y", "x")) %>%
-  dplyr::mutate(y = rev(y))
+dataDF <- melt(as.matrix(rawData), varnames = c("x", "y"))
 
 ggplot(dataDF) +
-  geom_raster(aes(x = x, y = y, fill = value))
+  geom_raster(aes(x = x, y = y, fill = value)) +
+    coord_flip() +
+  scale_x_reverse()
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-1-2-1.png)<!-- -->

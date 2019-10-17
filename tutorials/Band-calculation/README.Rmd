@@ -32,7 +32,7 @@ source("README_files/code/functions.R")
 
 # Real world observations 
 
-Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely: pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
+Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely: pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera. Therefore, read the data as was done in the [real world](../Real-world-images) section and add the appropriate meta data.
 
 ```{r, warning = FALSE, message = FALSE}
 library(reshape2)
@@ -41,8 +41,8 @@ library(dplyr)
 library(tidyr)
 library(raster)
 rawData <- raster("../Real-world-images/README_files/data/C17_sampleImg.tif")
-DFobs <- melt(as.matrix(rawData), varnames = c("y", "x")) %>%
-  dplyr::mutate(y = rev(y), imgType = "camera", imageNo = 251L)
+DFobs <- melt(as.matrix(rawData), varnames = c("x", "y")) %>%
+  dplyr::mutate(imgType = "camera", imageNo = 251L)
 
 ```
 
