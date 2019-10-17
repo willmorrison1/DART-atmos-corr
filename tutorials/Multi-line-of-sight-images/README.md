@@ -39,6 +39,44 @@ The [output file(s)](README_files/figure-misc/Camera.tiff) will be saved in a fo
 
 ```r
 library(raster, sp)
+```
+
+```
+## Warning: package 'raster' was built under R version 3.4.4
+```
+
+```
+## Loading required package: sp
+```
+
+```
+## Warning: package 'sp' was built under R version 3.4.4
+```
+
+```
+## 
+## Attaching package: 'raster'
+```
+
+```
+## The following object is masked from 'package:data.table':
+## 
+##     shift
+```
+
+```
+## The following object is masked from 'package:dplyr':
+## 
+##     select
+```
+
+```
+## The following object is masked from 'package:daRt':
+## 
+##     getData
+```
+
+```r
 plot(raster("README_files/figure-misc/Camera.tiff"), main = "RAW tiff")
 ```
 

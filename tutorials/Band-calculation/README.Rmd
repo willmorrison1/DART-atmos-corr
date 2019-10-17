@@ -1,6 +1,6 @@
 # Summary 
 
-This section demonstrates methods for correcting [real world](../Real-world-images) thermal images using [DART simulation](../DART-simulation) results. 
+This section demonstrates methods for correcting [real world](../Real-world-images) thermal images using [DART simulation](../DART-simulation) results. The [script files](README_files/code) contain the code for the functions executed below.
 
 ```{r, warning = FALSE, message = FALSE}
 library(daRt)
@@ -22,200 +22,37 @@ radDF <- as.data.frame(simData_radAtm)
 
 ```
 
-```{r, echo = FALSE}
+Source the functions that are used to demonstrate the band calculation and corrections.
 
-.planck <- function(lam, Temp){
-  #lam is wavelenght in microns
-  #Temp is temperature in Kelvin
-  
-  #boltzmann constant m^2 kg s^-2 K^-1
-  k <- 1.38064852e-23
-  #planck constant m^2 kg s^-1
-  h <- 6.62607004e-34
-  #speed of light m s^-1
-  cc <- 299792458
-  
-  
-  lam <- lam * 1e-6
-  specRad <- (((2 * h) * (cc^2))/((lam^5) * (exp((h * cc) / (lam * k * Temp)) - 1))) * 1e-6
-  
-  return(specRad)
-  
-}
-
-.normalise <- function(x) {
-  minVal <- min(x, na.rm = TRUE)
-  maxVal <- max(x, na.rm = TRUE)
-  if (minVal == maxVal) {
-    return(x)
-  } else {
-    return((x - minVal) / (maxVal - minVal))
-  }
-}
-
-SRFinterp <- function(SRF_raw, simData, sigFig = 4) {
-  
-  require(dplyr)
-  require(imputeTS)
-  
-  SRF_raw$value <- .normalise(SRF_raw$value)
-  
-  #todo - check within min and max
-  
-  lambdaCols <- c("lambdamin", "lambdamid", "lambdamax", "equivalentWavelength")
-  wavelengthVals <- wavelengths(simData)
-  wavelengthVals[, lambdaCols] <- round(wavelengthVals[, lambdaCols], sigFig)
-  SRF_raw_edited <- SRF_raw %>%
-    dplyr::mutate(lambda = round(lambda, sigFig)) %>%
-    dplyr::filter(!duplicated(lambda))
-  minMaxPer <- sapply(wavelengthVals[, lambdaCols], function(x) 
-    c(min(x, na.rm = TRUE), max(x, na.rm = TRUE)))
-  minMaxAll <- apply(minMaxPer, 1, function(x) 
-    c(min(x, na.rm = TRUE), max(x, na.rm = TRUE)))
-  lambdaOUTall <- seq(minMaxAll[, 1][1], minMaxAll[, 2][2], by = 1 * 10^-(sigFig))
-  dfOUT <- data.frame(lambda = lambdaOUTall) %>%
-    dplyr::mutate(lambda = round(lambda, sigFig)) %>%
-    dplyr::filter(!duplicated(lambda))
-  lambdaDF <- dfOUT %>% 
-    dplyr::left_join(SRF_raw_edited, by = "lambda") %>%
-    dplyr::mutate(value = imputeTS::na_interpolation(value))
-  wavelengthOut <- wavelengthVals
-  for (lambdaCol in lambdaCols) {
-    lambdaDFout <- lambdaDF
-    colnames(lambdaDFout) <- c(lambdaCol, paste0(lambdaCol, "_SRF"))
-    wavelengthOut <- wavelengthOut %>%
-      dplyr::left_join(lambdaDFout, by = lambdaCol)
-  }
-  wavelengthOutDF <- dplyr::bind_cols(wavelengthOut)
-  
-  return(wavelengthOutDF)
-}
-
-
-thermographToSpectralRadiance <- function(thermograph, simData) {
-  
-  require(dplyr)
-  
-  wavelengthVals <- wavelengths(simData)
-  
-  wavelengthDF <- expand.grid(
-    x = unique(thermograph$x), 
-    y = unique(thermograph$y),
-    band = unique(wavelengthVals$band)) %>%
-    dplyr::left_join(wavelengthVals, by = "band")
-  
-  spectralRadDF <- wavelengthDF %>%
-    dplyr::left_join(thermograph, by = c("x", "y")) %>%
-    dplyr::mutate(value = .planck(lam = equivalentWavelength, Temp = value))
-  
-  return(spectralRadDF)
-}
-
-bandRadiance_surf <- function(LCam_spectralBrick, simData_transAtm, simData_radAtm, SRF_raw) {
-  
-  SRF <- SRFinterp(SRF_raw, simData_transAtm)
-  
-  Lcam_attenuated <- LCam_spectralBrick %>% 
-    dplyr::left_join(as.data.frame(simData_transAtm) %>% 
-                       dplyr::rename(tau = value), 
-                     by = c("x", "y", "band", "simName", "imgType", "imageNo")) %>%
-    dplyr::mutate(value = value / tau) %>%
-    dplyr::select(-tau)
-  
-  Latm_attenuated <- as.data.frame(simData_radAtm) %>% 
-    dplyr::left_join(SRF %>% 
-                       dplyr::select(-c(
-                         lambdamin_SRF, 
-                         lambdamid_SRF, 
-                         lambdamax_SRF, 
-                         equivalentWavelength_SRF)), 
-                     by = c("band", "simName")) %>%
-    dplyr::left_join(as.data.frame(simData_transAtm) %>% 
-                       dplyr::rename(tau = value), 
-                     by = c("x", "y", "band", "variable", "iter", "typeNum", 
-                            "imgType", "imageNo", "VZ", "VA", "simName", "transmittance")) %>%
-    dplyr::mutate(value = value / tau) %>%
-    dplyr::select(-tau)
-  
-  Lcam_bandRad <- getBandRadiance(spectralDF = Lcam_attenuated, 
-                                  SRF = SRF)
-  Latm_bandRad <- getBandRadiance(spectralDF = Latm_attenuated, 
-                                  SRF = SRF)
-  
-  OUTdf <- Lcam_bandRad %>%
-    dplyr::left_join(
-      Latm_bandRad %>%
-        dplyr::mutate(bandValue_Latm = bandValue) %>%
-        dplyr::select(-bandValue),
-      by = c("x", "y", "iter", "imgType", "imageNo", "VZ", "VA")) %>%
-    dplyr::mutate(bandValue = bandValue - bandValue_Latm)
-  
-  return(OUTdf)
-}
-
-
-getBandRadiance <- function(spectralDF, SRF) {
-  
-  SRFbandvals <- SRF %>% 
-    dplyr::select(-c(lambdamin, lambdamid, lambdamax, equivalentWavelength))
-  
-  spectralDFintegrals <- spectralDF %>%
-    dplyr::left_join(SRFbandvals, 
-                     by = c("band", "simName")) %>%
-    dplyr::mutate(deltaLambda = (lambdamax - lambdamin) * 0.5,
-                  LHS = value * lambdamin_SRF + value * lambdamid_SRF,
-                  RHS = value * lambdamid_SRF + value * lambdamax_SRF,
-                  integral = (LHS + RHS) * deltaLambda * 0.5) %>%
-    dplyr::group_by(x, y, iter, typeNum, imgType, imageNo, VZ, VA, simName) %>%
-    dplyr::summarise(bandValue = sum(integral, na.rm = TRUE))
-  
-  return(spectralDFintegrals)
-}
-
-.planck_inverse <- function(lam, specRad){
-  c1 <- 1.191042e8
-  c2 <- 1.4387752e4
-  
-  return(c2 / 
-           (lam * log(c1 / (lam^5 * specRad) + 1)))
-  
-}
+```{r}
+source("README_files/code/functions.R")
 ```
-
-Band calculation trapezoidal approximation:
-<!-- https://www.latex4technics.com -->
-<!-- $$\int_{\lambda=1}^{\lambda=n} d\lambda L_\lambda R_\lambda \approx \sum_{i=1}^n \frac{1}{2} \Bigg[\Big[\frac{1}{2} (\lambda_{max_{i}} - \lambda_{min_{i}})\Big] \times (L_{\lambda_{i}} R_{min_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{max_{i}} ) \Bigg]$$ -->
-![bandCalcApproximation](README_files/figure-misc/Tex2Img.png)
-
-
-
-$\int_{\lambda=1}^{\lambda=n} d\lambda L_\lambda R_\lambda \approx \sum_{i=1}^n \frac{1}{2} \Bigg[\Big[\frac{1}{2} (\lambda_{max_{i}} - \lambda_{min_{i}})\Big] \times (L_{\lambda_{i}} R_{min_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{max_{i}} ) \Bigg]$
-
 
 Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely: pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
 
-Todo: make formal `Thermograph` class to check validity and enable relevant methods e.g. spectralRadiance(tapp, simData[opt], lambda[opt]). 
 ```{r, warning = FALSE, message = FALSE}
 DFobs <- expand.grid(x = unique(transDF$x), y = unique(transDF$y), value = 300, imgType = "camera", imageNo = 251)
 ```
 
-The user should also have a spectral response function that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it will be linearly interpolated to exactly match the required bands.
+The user should also have a spectral response function $R$ that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it will be linearly interpolated to exactly match the required bands.
 
 ```{r, warning = FALSE, message = FALSE}
 SRF_raw <- read.table("README_files/data/SRF.txt", col.names = c("lambda", "value"))
 ```
 
-WIP. Tapp to spectral radiance
+Convert the observations into spectral radiances across the wavelengths within the simulation.
 
 ```{r, warning = FALSE, message = FALSE}
 LcamSpectral <- thermographToSpectralRadiance(thermograph = DFobs, simData = simData_radAtm)
 ```
 
-WIP. Perform band calculation. 
-- Tidy up inputs to bandRadiance_surf()? e.g. 
-- LCam_spectralBrick check is a valid data frame 
-- thermographToSpectralRadiance() can be internal. 
-- validate with paper results
+The band calculations use a trapezoidal approximation:
+<!-- https://www.latex4technics.com -->
+<!-- $$\int_{\lambda=1}^{\lambda=n} d\lambda L_\lambda R_\lambda \approx \sum_{i=1}^n \frac{1}{2} \Bigg[\Big[\frac{1}{2} (\lambda_{max_{i}} - \lambda_{min_{i}})\Big] \times (L_{\lambda_{i}} R_{min_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{max_{i}} ) \Bigg]$$ -->
+![bandCalcApproximation](README_files/figure-misc/Tex2Img.png)
+where $R$ is the spectral response function, L_\lambda is the radiance, $i$ is the band index, $n$ is the number of bands, and underscores $min$ $mid$ $max$ refer to the minimum, central and maximum wavelength for each DART simulation band. DART computes the average optical properties across each band, and uses the central wavelength (i.e. it does no integration across the full band width during simulation). 
+
+With the DART simulation data and correctly configured observations, correct the observations for atmospheric effects.
 
 ```{r, warning = FALSE, message = FALSE}
 bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral, 
@@ -223,43 +60,22 @@ bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral,
                                simData_radAtm = simData_radAtm, 
                                SRF_raw = SRF_raw)
 
-
 ```
 
+and plot the corrected surface-leaving band radiance (cf. uncorrected at-sensor band radiance).
 ```{r}
 ggplot(bandRadDF %>% filter(between(bandValue, 48, 52))) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
   scale_x_reverse() +
-  ggtitle("At-sensor surface leaving band radiance")
+  ggtitle("At-sensor surface leaving band radiance") +
+  labs(fill = expression(italic(L)~"(W m"^"-2"~sr^-1~mu*m^"-1")) +
+  theme(aspect.ratio = 160/120)
 
 ```
 
-
-
-```{r}
-library(raster)
-
-SRF <- SRFinterp(SRF_raw = SRF_raw, simData = simData_radAtm)
-radAtmSpectral <- as.data.frame(simData_radAtm) %>%
-  dplyr::left_join(wavelengths(simData_radAtm))
-
-radAtmBand <- getBandRadiance(spectralDF = radAtmSpectral, SRF = SRF)
-
-ggplot(radAtmSpectral %>% 
-         group_by(lambdamid, add = TRUE) %>% 
-         summarise(valMin = quantile(value, 0.1),
-                   valMid = quantile(value, 0.5), 
-                   valMax = quantile(value, 0.9))) +
-  geom_ribbon(aes(x = lambdamid, ymin = valMin, ymax = valMax), fill = "red") +
-  geom_line(aes(x = lambdamid, y = valMid), colour = "black", size = 0.75)
-
-ggplot(radAtmBand) +
-  geom_raster(aes(x = x, y = y, fill = bandValue)) +
-  theme_bw() +
-  coord_flip() +
-  scale_x_reverse() +
-  ggtitle("At-sensor atmospheric band radiance")
-
-```
+To convert he band radiance back to temperature, a band radiance to temperature function needs to be created. Band radiance is related to temperature using the following equation:
+<!-- $$L = \int_{\lambda=7\mu m}^{\lambda=14\mu m} d\lambda~R_\lambda B_\lambda(T)$$ -->
+![LtoT_LUT](README_files/figure-misc/Tex2Img_1.png)
+where L is the band radiance $(W m^{-2} sr^{-1} \mu m^{-1})$, $R_\lambda$ is the spectral response function and $B_\lambda(T)$ is the planck function. Acros a range of temperatures, a polynomial can be fitted to find a temperature for $L$ that is shown in the above figure. 
