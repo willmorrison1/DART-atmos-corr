@@ -36,7 +36,7 @@ Execute the following command (will require modification based on your file loca
 
 The [output file(s)](README_files/figure-misc/Camera.tiff) will be saved in a folder `cameraPathLengths` as shown in the command line message upon program completion.
 
-``` {r}
+``` {r, dpi = 200}
 library(raster, sp)
 plot(raster("README_files/figure-misc/Camera.tiff"), main = "RAW tiff")
 ```
@@ -50,7 +50,7 @@ zPath = (RAW / 65535) * renderDistance
 
 where `zPath` is the scaled path length (m) `RAW` is the [raw image](README_files/figure-misc/Camera.tiff) and `renderDistance` is the pre-defined render distance set in [writeCameraPathLengths.py](code/writeCameraPathLengths.py) (default 5000 m). 
 
-``` {r}
+``` {r, dpi = 200}
 library(raster, sp)
 RAW <- raster("README_files/figure-misc/Camera.tiff")
 renderDistance <- 5000 # m

@@ -23,7 +23,8 @@ ggplot(dataDF) +
   scale_x_reverse() +
   ggtitle("Optris PI thermal camera image") +
   labs(fill = "Tb (K)") +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+        aspect.ratio = 120 / 160)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-1-2-1.png)<!-- -->

@@ -34,7 +34,7 @@ source("README_files/code/functions.R")
 
 Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely: pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera. Therefore, read the data as was done in the [real world](../Real-world-images) section and add the appropriate meta data.
 
-```{r, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE, dpi = 200}
 library(reshape2)
 library(ggplot2)
 library(dplyr)
@@ -50,7 +50,7 @@ DFobs <- melt(as.matrix(rawData), varnames = c("x", "y")) %>%
 
 The user should also have a spectral response function _R_ that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it will be linearly interpolated to exactly match the required bands.
 
-```{r, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE, dpi = 200}
 SRF_raw <- read.table("README_files/data/SRF.txt", col.names = c("lambda", "value"))
 SRF <- SRFinterp(SRF_raw, simData_tappAtm)
 plot(c(SRF$lambdamin,SRF$lambdamid, SRF$lambdamax),
@@ -78,7 +78,7 @@ LcamSpectral <- thermographToSpectralRadiance(thermograph = DFobs, simData = sim
 
 With the DART simulation data and correctly configured observations, correct the observations for atmospheric effects.
 
-```{r, warning = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE, dpi = 200}
 bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral, 
                                simData_transAtm = simData_transAtm, 
                                simData_radAtm = simData_radAtm, 
@@ -96,7 +96,7 @@ bandRadDF_noAtm <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral,
 ```
 
 and plot the corrected surface-leaving band radiance (cf. uncorrected at-sensor band radiance).
-```{r}
+```{r, dpi = 200}
 ggplot(bandRadDF %>% filter(between(bandValue, 30, 85))) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
@@ -112,7 +112,7 @@ ggplot(bandRadDF %>% filter(between(bandValue, 30, 85))) +
 
 The correction magnitude is calculated here for band radiance. Steps to convert band radiance to temperature are noted.
 
-```{r}
+```{r, dpi = 200}
 diffDF <- bandRadDF %>% 
   dplyr::rename(bandValueAtm = bandValue) %>%
   dplyr::left_join(bandRadDF_noAtm)

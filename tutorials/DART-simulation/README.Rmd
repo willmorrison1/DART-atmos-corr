@@ -104,7 +104,7 @@ radDF$value[radDF$value == 0] <- NA
 ```
 
 Now plot the data. Plot all raw images.
-``` {r, warning = FALSE, message = FALSE, dpi = 250}
+``` {r, warning = FALSE, message = FALSE, dpi = 200}
 
 plotThemes <- theme(
   axis.text = element_blank(),
@@ -140,7 +140,7 @@ ggplot(radDF) +
 ```
 
 Now do some simple aggregation of the data and plot the median transmittance (line) and 5th -> 9th percentile (shading) across all pixels.
-```{r, fig.height = 3, warning = FALSE, message = FALSE, dpi = 250}
+```{r, fig.height = 3, warning = FALSE, message = FALSE, dpi = 200}
 transDFsummary <- transDF %>%
   dplyr::group_by(band, imgType, imageNo, simName) %>%
   dplyr::summarise(minValue = quantile(value, 0.05, na.rm = TRUE),
