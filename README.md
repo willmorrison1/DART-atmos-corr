@@ -18,10 +18,9 @@ Summary of atmospheric correction routine
 1.  [**Real world images (WIP)**](tutorials/Real-world-images). Defines the types of 'real world' images that are suitable for correction using this technique.
 2.  [**Model world**](tutorials/Model-world). Configure a three-dimensional model world to interpret the images and faciliate the correction.
 3.  [**DART atmosphere simulation**](tutorials/DART-simulation). Configure and run DART for simulation of atmospheric effects.
-4.  [**Band calculation and correction (WIP)**](tutorials/Band-calculation). Correct the real world images using the atmosphere simulation.
+4.  [**Band calculation and correction**](tutorials/Band-calculation). Correct the real world images using the atmosphere simulation.
 
 ### Optional steps
 
 1.  [**Create multi line of sight image**](tutorials/Multi-line-of-sight-images). For very oblique view angles, create multi line of sight (MLOS) image with per-pixel path lengths between the surface and camera.
-2.  [**DART image post-processing (WIP)**](tutorials/DART-simulation-post-processing). Use the multi line of sight image mask with DART images.
-3.  [**Image analysis (WIP)**](tutorials/Image-analysis). Perform some simple analysis on processed images.
+2.  [**DART image post-processing (WIP)**](tutorials/DART-simulation-post-processing).

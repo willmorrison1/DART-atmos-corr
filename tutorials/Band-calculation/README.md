@@ -36,7 +36,7 @@ Define the real world observations. This should be a data frame which has inform
 DFobs <- expand.grid(x = unique(transDF$x), y = unique(transDF$y), value = 300, imgType = "camera", imageNo = 251)
 ```
 
-The user should also have a spectral response function $R$ that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it will be linearly interpolated to exactly match the required bands.
+The user should also have a spectral response function R that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it will be linearly interpolated to exactly match the required bands.
 
 
 ```r
@@ -54,7 +54,8 @@ The band calculations use a trapezoidal approximation:
 <!-- https://www.latex4technics.com -->
 <!-- $$\int_{\lambda=1}^{\lambda=n} d\lambda L_\lambda R_\lambda \approx \sum_{i=1}^n \frac{1}{2} \Bigg[\Big[\frac{1}{2} (\lambda_{max_{i}} - \lambda_{min_{i}})\Big] \times (L_{\lambda_{i}} R_{min_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{max_{i}} ) \Bigg]$$ -->
 ![bandCalcApproximation](README_files/figure-misc/Tex2Img.png)
-where $R$ is the spectral response function, L_\lambda is the radiance, $i$ is the band index, $n$ is the number of bands, and underscores $min$ $mid$ $max$ refer to the minimum, central and maximum wavelength for each DART simulation band. DART computes the average optical properties across each band, and uses the central wavelength (i.e. it does no integration across the full band width during simulation). 
+
+where R is the spectral response function, lambda is wavelength, L is the radiance, i is the band index, n is the number of bands, and underscores min mid max refer to the minimum, central and maximum wavelength for each DART simulation band. DART computes the average optical properties across each band, and uses the central wavelength (i.e. it does no integration across the full band width during simulation). 
 
 With the DART simulation data and correctly configured observations, correct the observations for atmospheric effects.
 
@@ -76,7 +77,7 @@ ggplot(bandRadDF %>% filter(between(bandValue, 48, 52))) +
   scale_x_reverse() +
   ggtitle("At-sensor surface leaving band radiance") +
   labs(fill = expression(italic(L)~"(W m"^"-2"~sr^-1~mu*m^"-1")) +
-  theme(aspect.ratio = 160/120)
+  theme(aspect.ratio = 120/160)
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-8-1.png)
@@ -84,4 +85,5 @@ ggplot(bandRadDF %>% filter(between(bandValue, 48, 52))) +
 To convert he band radiance back to temperature, a band radiance to temperature function needs to be created. Band radiance is related to temperature using the following equation:
 <!-- $$L = \int_{\lambda=7\mu m}^{\lambda=14\mu m} d\lambda~R_\lambda B_\lambda(T)$$ -->
 ![LtoT_LUT](README_files/figure-misc/Tex2Img_1.png)
-where L is the band radiance $(W m^{-2} sr^{-1} \mu m^{-1})$, $R_\lambda$ is the spectral response function and $B_\lambda(T)$ is the planck function. Acros a range of temperatures, a polynomial can be fitted to find a temperature for $L$ that is shown in the above figure. 
+
+where L is the band radiance, R is the spectral response function and B is the planck function. Across a range of temperatures, a polynomial can be fitted to find a temperature for L that is shown in the above figure. 
