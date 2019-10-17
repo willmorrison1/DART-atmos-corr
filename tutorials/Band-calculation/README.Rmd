@@ -83,17 +83,37 @@ bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral,
                                simData_radAtm = simData_radAtm, 
                                SRF_raw = SRF_raw)
 
+#a workaround for lack of Arith() methods!
+simData_transAtm@data$value <- 1
+simData_radAtm@data$value <- 0
+bandRadDF_noAtm <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral, 
+                               simData_transAtm = simData_transAtm, 
+                               simData_radAtm = simData_radAtm, 
+                               SRF_raw = SRF_raw)
 ```
 
 and plot the corrected surface-leaving band radiance (cf. uncorrected at-sensor band radiance).
 ```{r}
-ggplot(bandRadDF %>% filter(between(bandValue, 45, 85))) +
+ggplot(bandRadDF %>% filter(between(bandValue, 30, 85))) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
   scale_x_reverse() +
   ggtitle("At-sensor surface leaving band radiance") +
   labs(fill = expression(italic(L)~"(W m"^"-2"~sr^-1~mu*m^"-1")) +
+  theme(aspect.ratio = 120 / 160)
+
+tmp <- bandRadDF %>% 
+  dplyr::rename(bandValueAtm = bandValue) %>%
+  dplyr::left_join(bandRadDF_noAtm)
+
+ggplot(tmp) +
+  geom_raster(aes(x = x, y = y, fill = bandValueAtm - bandValue)) +
+  theme_bw() +
+  coord_flip() +
+  scale_x_reverse() +
+  ggtitle("At-sensor surface leaving band radiance") +
+  labs(fill = "delta_L") +
   theme(aspect.ratio = 120 / 160)
 
 ```

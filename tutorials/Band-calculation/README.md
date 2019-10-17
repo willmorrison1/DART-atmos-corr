@@ -88,12 +88,20 @@ bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral,
                                simData_transAtm = simData_transAtm, 
                                simData_radAtm = simData_radAtm, 
                                SRF_raw = SRF_raw)
+
+#a workaround for lack of Arith() methods!
+simData_transAtm@data$value <- 1
+simData_radAtm@data$value <- 0
+bandRadDF_noAtm <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral, 
+                               simData_transAtm = simData_transAtm, 
+                               simData_radAtm = simData_radAtm, 
+                               SRF_raw = SRF_raw)
 ```
 
 and plot the corrected surface-leaving band radiance (cf. uncorrected at-sensor band radiance).
 
 ```r
-ggplot(bandRadDF %>% filter(between(bandValue, 45, 85))) +
+ggplot(bandRadDF %>% filter(between(bandValue, 30, 85))) +
   geom_raster(aes(x = x, y = y, fill = bandValue)) +
   theme_bw() +
   coord_flip() +
@@ -104,6 +112,29 @@ ggplot(bandRadDF %>% filter(between(bandValue, 45, 85))) +
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+```r
+tmp <- bandRadDF %>% 
+  dplyr::rename(bandValueAtm = bandValue) %>%
+  dplyr::left_join(bandRadDF_noAtm)
+```
+
+```
+## Joining, by = c("x", "y", "iter", "typeNum.x", "imgType", "imageNo", "VZ", "VA", "simName.x", "typeNum.y", "simName.y", "bandValue_Latm")
+```
+
+```r
+ggplot(tmp) +
+  geom_raster(aes(x = x, y = y, fill = bandValueAtm - bandValue)) +
+  theme_bw() +
+  coord_flip() +
+  scale_x_reverse() +
+  ggtitle("At-sensor surface leaving band radiance") +
+  labs(fill = "delta_L") +
+  theme(aspect.ratio = 120 / 160)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
 
 To convert the band radiance back to temperature, a band radiance to temperature function needs to be created. Band radiance is related to temperature using the following equation:
 <!-- $$L = \int_{\lambda=7\mu m}^{\lambda=14\mu m} d\lambda~R_\lambda B_\lambda(T)$$ -->
