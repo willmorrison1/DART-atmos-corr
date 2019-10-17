@@ -128,7 +128,7 @@ bandRadiance_surf <- function(LCam_spectralBrick, simData_transAtm, simData_radA
       Latm_bandRad %>%
         dplyr::mutate(bandValue_Latm = bandValue) %>%
         dplyr::select(-bandValue),
-      by = c("x", "y", "iter", "imgType", "imageNo", "VZ", "VA")) %>%
+      by = c("x", "y", "iter", "imgType", "imageNo", "VZ", "VA", "typeNum", "simName")) %>%
     dplyr::mutate(bandValue = bandValue - bandValue_Latm)
   
   return(OUTdf)

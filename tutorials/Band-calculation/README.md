@@ -116,23 +116,24 @@ ggplot(bandRadDF %>% filter(between(bandValue, 30, 85))) +
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ```r
-tmp <- bandRadDF %>% 
+diffDF <- bandRadDF %>% 
   dplyr::rename(bandValueAtm = bandValue) %>%
   dplyr::left_join(bandRadDF_noAtm)
 ```
 
 ```
-## Joining, by = c("x", "y", "iter", "typeNum.x", "imgType", "imageNo", "VZ", "VA", "simName.x", "typeNum.y", "simName.y", "bandValue_Latm")
+## Joining, by = c("x", "y", "iter", "typeNum", "imgType", "imageNo", "VZ", "VA", "simName", "bandValue_Latm")
 ```
 
 ```r
-ggplot(tmp %>% filter(between(bandValueAtm - bandValue, 0, 3.5))) +
+ggplot(diffDF %>% 
+         filter(between(bandValueAtm - bandValue, 0, 3.5))) +
   geom_raster(aes(x = x, y = y, fill = bandValueAtm - bandValue)) +
   theme_bw() +
   coord_flip() +
   scale_x_reverse() +
-  ggtitle("Difference") +
-  labs(fill = "delta_L") +
+  ggtitle("Band radiance (corrected - uncorrected)") +
+  labs(fill = expression(Delta*italic(L))) +
   theme(aspect.ratio = 120 / 160) +
   theme(legend.position = "bottom")
 ```

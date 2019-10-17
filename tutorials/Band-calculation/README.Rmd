@@ -105,17 +105,18 @@ ggplot(bandRadDF %>% filter(between(bandValue, 30, 85))) +
   theme(aspect.ratio = 120 / 160) +
   theme(legend.position = "bottom")
 
-tmp <- bandRadDF %>% 
+diffDF <- bandRadDF %>% 
   dplyr::rename(bandValueAtm = bandValue) %>%
   dplyr::left_join(bandRadDF_noAtm)
 
-ggplot(tmp %>% filter(between(bandValueAtm - bandValue, 0, 3.5))) +
+ggplot(diffDF %>% 
+         filter(between(bandValueAtm - bandValue, 0, 3.5))) +
   geom_raster(aes(x = x, y = y, fill = bandValueAtm - bandValue)) +
   theme_bw() +
   coord_flip() +
   scale_x_reverse() +
-  ggtitle("Difference") +
-  labs(fill = "delta_L") +
+  ggtitle("Band radiance (corrected - uncorrected)") +
+  labs(fill = expression(Delta*italic(L))) +
   theme(aspect.ratio = 120 / 160) +
   theme(legend.position = "bottom")
 
