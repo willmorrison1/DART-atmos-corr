@@ -55,10 +55,11 @@ The user should also have a spectral response function _R_ that spans the [DART 
 ```r
 SRF_raw <- read.table("README_files/data/SRF.txt", col.names = c("lambda", "value"))
 SRF <- SRFinterp(SRF_raw, simData_tappAtm)
-plot(SRF$lambdamid, SRF$lambdamid_SRF, col = "red", type = "l", xlab = "lambda", ylab = "SRF",
-     ylim = c(0, 1))
-points(SRF_raw, pch = 20)
-legend("bottomright", legend = c("SRF_raw", "SRFinterp_normalised"), col = c("black", "red"), lty = 1)
+plot(c(SRF$lambdamin,SRF$lambdamid, SRF$lambdamax),
+     c(SRF$lambdamin_SRF, SRF$lambdamid_SRF, SRF$lambdamax_SRF), 
+     col = "red", xlab = "lambda", ylab = "SRF", ylim = c(0, 1), pch = 20)
+lines(SRF_raw)
+legend("bottom", legend = c("SRF_raw", "SRFinterp_normalised"), col = c("black", "red"), lty = 1)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->

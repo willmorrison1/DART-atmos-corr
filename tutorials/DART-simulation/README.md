@@ -126,7 +126,8 @@ plotThemes <- theme(
   panel.spacing = unit(0.1, "lines"),
   strip.text = element_text(size = 5, margin = margin(0, 0, 0, 0)),
   strip.background = element_rect(fill = "white", margin(0, 0, 0, 0)),
-  aspect.ratio = 120 / 160
+  aspect.ratio = 120 / 160,
+  legend.position = "bottom"
 )
 
 ggplot(transDF) +
@@ -151,8 +152,7 @@ ggplot(radDF) +
   coord_flip() +
   scale_x_reverse(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
-  ggtitle("Atmospheric spectral radiance") +
-  theme(legend.position = "bottom")
+  ggtitle("Atmospheric spectral radiance")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
@@ -171,8 +171,7 @@ ggplot(transDFsummary %>% dplyr::left_join(wavelengths(simData_radAtm))) +
   geom_line(aes(x = lambdamid, y = medValue), size = 0.65) +
   xlab(expression(wavelength~"("*mu*m*")")) +
   ylab("Transmittance") + 
-  theme_bw() +
-  theme(legend.position = "bottom")
+  theme_bw()
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->

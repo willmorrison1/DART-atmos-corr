@@ -114,7 +114,7 @@ plotThemes <- theme(
   strip.text = element_text(size = 5, margin = margin(0, 0, 0, 0)),
   strip.background = element_rect(fill = "white", margin(0, 0, 0, 0)),
   aspect.ratio = 120 / 160,
-  legend.position = "bottom")
+  legend.position = "bottom"
 )
 
 ggplot(transDF) +

@@ -23,9 +23,9 @@ process.
 
 ### Required steps
 
-1.  [**Real world images (WIP)**](tutorials/Real-world-images). Defines
-    the types of ‘real world’ images that are suitable for correction
-    using this technique.
+1.  [**Real world images**](tutorials/Real-world-images). Defines the
+    types of ‘real world’ images that are suitable for correction using
+    this technique.
 2.  [**Model world**](tutorials/Model-world). Configure a
     three-dimensional model world to interpret the images and faciliate
     the correction.
