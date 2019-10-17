@@ -2,6 +2,8 @@
 
 This section demonstrates methods for correcting [real world](../Real-world-images) thermal images using [DART simulation](../DART-simulation) results. The [script files](README_files/code) contain the code for the functions executed below.
 
+# Load DART data
+
 
 ```r
 library(daRt)
@@ -29,6 +31,8 @@ Source the functions that are used to demonstrate the band calculation and corre
 source("README_files/code/functions.R")
 ```
 
+# Real world observations 
+
 Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely: pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
 
 
@@ -36,12 +40,31 @@ Define the real world observations. This should be a data frame which has inform
 DFobs <- expand.grid(x = unique(transDF$x), y = unique(transDF$y), value = 300, imgType = "camera", imageNo = 251)
 ```
 
-The user should also have a spectral response function R that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it will be linearly interpolated to exactly match the required bands.
+# Spectral response function
+
+The user should also have a spectral response function _R_ that spans the [DART simulation](../DART-simulation) bands. It can be sparsely/heterogeneously populated with data and it will be linearly interpolated to exactly match the required bands.
 
 
 ```r
 SRF_raw <- read.table("README_files/data/SRF.txt", col.names = c("lambda", "value"))
+SRF <- SRFinterp(SRF_raw, simData_tappAtm)
+plot(SRF$lambdamid, SRF$lambdamid_SRF, col = "red", type = "l", xlab = "lambda", ylab = "SRF",
+     ylim = c(0, 1))
+points(SRF_raw, pch = 20)
+legend("bottomright", legend = c("SRF_raw", "SRFinterp_normalised"), col = c("black", "red"), lty = 1)
 ```
+
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+
+# Band calculation
+
+The band calculations use a trapezoidal approximation:
+<!-- https://www.latex4technics.com -->
+<!-- $$\int_{\lambda=1}^{\lambda=n} d\lambda L_\lambda R_\lambda \approx \sum_{i=1}^n \frac{1}{2} \Bigg[\Big[\frac{1}{2} (\lambda_{max_{i}} - \lambda_{min_{i}})\Big] \times (L_{\lambda_{i}} R_{min_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{max_{i}} ) \Bigg]$$ -->
+![bandCalcApproximation](README_files/figure-misc/Tex2Img.png)
+
+
+where R is the spectral response function, lambda is wavelength, _L_ is the radiance, _i_ is the band index, _n_ is the number of bands, and subscript _min_ _mid_ _max_ refer to the minimum, central and maximum wavelength for each DART simulation band. DART computes the average optical properties across each band, and uses the central wavelength (i.e. it does no integration across the full band width during simulation). 
 
 Convert the observations into spectral radiances across the wavelengths within the simulation.
 
@@ -49,13 +72,6 @@ Convert the observations into spectral radiances across the wavelengths within t
 ```r
 LcamSpectral <- thermographToSpectralRadiance(thermograph = DFobs, simData = simData_radAtm)
 ```
-
-The band calculations use a trapezoidal approximation:
-<!-- https://www.latex4technics.com -->
-<!-- $$\int_{\lambda=1}^{\lambda=n} d\lambda L_\lambda R_\lambda \approx \sum_{i=1}^n \frac{1}{2} \Bigg[\Big[\frac{1}{2} (\lambda_{max_{i}} - \lambda_{min_{i}})\Big] \times (L_{\lambda_{i}} R_{min_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{mid_{i}} + L_{\lambda_{i}} R_{max_{i}} ) \Bigg]$$ -->
-![bandCalcApproximation](README_files/figure-misc/Tex2Img.png)
-
-where R is the spectral response function, lambda is wavelength, L is the radiance, i is the band index, n is the number of bands, and underscores min mid max refer to the minimum, central and maximum wavelength for each DART simulation band. DART computes the average optical properties across each band, and uses the central wavelength (i.e. it does no integration across the full band width during simulation). 
 
 With the DART simulation data and correctly configured observations, correct the observations for atmospheric effects.
 
@@ -82,8 +98,8 @@ ggplot(bandRadDF %>% filter(between(bandValue, 48, 52))) +
 
 ![](README_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
-To convert he band radiance back to temperature, a band radiance to temperature function needs to be created. Band radiance is related to temperature using the following equation:
+To convert the band radiance back to temperature, a band radiance to temperature function needs to be created. Band radiance is related to temperature using the following equation:
 <!-- $$L = \int_{\lambda=7\mu m}^{\lambda=14\mu m} d\lambda~R_\lambda B_\lambda(T)$$ -->
 ![LtoT_LUT](README_files/figure-misc/Tex2Img_1.png)
 
-where L is the band radiance, R is the spectral response function and B is the planck function. Across a range of temperatures, a polynomial can be fitted to find a temperature for L that is shown in the above figure. 
+where _L_ is the band radiance, _R_ is the spectral response function and _B_ is the planck function. Across a range of temperatures, a polynomial can be fitted to find a temperature for _L_ that is shown in the above figure. 
