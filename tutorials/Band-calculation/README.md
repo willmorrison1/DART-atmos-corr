@@ -90,9 +90,11 @@ bandRadDF <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral,
                                simData_radAtm = simData_radAtm, 
                                SRF_raw = SRF_raw)
 
-#a workaround for lack of Arith() methods!
-simData_transAtm@data$value <- 1
-simData_radAtm@data$value <- 0
+#to get datasets with no atmosphere correction, here's 
+#a workaround for lack of Arith() methods ...
+simData_transAtm@data$value <- 1 #fully transparent atmosphere
+simData_radAtm@data$value <- 0 #no atmosphere emission
+#calculate band radiance with no atmosphere correction i.e. at-sensor radiance.
 bandRadDF_noAtm <- bandRadiance_surf(LCam_spectralBrick = LcamSpectral, 
                                simData_transAtm = simData_transAtm, 
                                simData_radAtm = simData_radAtm, 
@@ -122,7 +124,7 @@ diffDF <- bandRadDF %>%
 ```
 
 ```
-## Joining, by = c("typeNum.x", "x", "y", "iter", "imgType", "imageNo", "VZ", "VA", "simName", "typeNum.y", "bandValue_Latm")
+## Joining, by = c("x", "y", "iter", "typeNum.x", "imgType", "imageNo", "VZ", "VA", "simName", "typeNum.y", "bandValue_Latm")
 ```
 
 ```r
