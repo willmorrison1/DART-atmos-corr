@@ -39,8 +39,8 @@ Z[mw] =  87.1
 with the world coordinate origin in the center of the scene, the comparable DART camera coordinates are:
 
 ```
-X[dart] = (max(Y[dart]) / 2) + Y[mw]
-Y[dart] = (max(X[dart]) / 2) + X[mw]
+X[dart] = (max(Y[dart]) / 2) - Y[mw]
+Y[dart] = (max(X[dart]) / 2) - X[mw]
 Z[dart] =  Z[mw]
 ```
 This is becuase the DART world coordinate origin is in the "top left" and the X and Y axes are opposite to that of Blender. For the [model world](../Model-world) camera example, this requires the following calculation:
@@ -50,7 +50,7 @@ This is becuase the DART world coordinate origin is in the "top left" and the X 
 Xdart_max <- Ydart_max <- 300
 Xmw <- -28.553
 Ymw <- -27.9681
-Xdart <- (Xdart_max / 2) + Ymw
+Xdart <- (Xdart_max / 2) - Ymw
 Ydart <- (Ydart_max / 2) + Xmw
 ```
 which gives the following DART coordinates:
@@ -61,7 +61,7 @@ print(Xdart)
 ```
 
 ```
-## [1] 122.0319
+## [1] 177.9681
 ```
 
 ```r

@@ -101,7 +101,8 @@ ggplot(bandRadDF %>% filter(between(bandValue, 30, 85))) +
   scale_x_reverse() +
   ggtitle("At-sensor surface leaving band radiance") +
   labs(fill = expression(italic(L)~"(W m"^"-2"~sr^-1~mu*m^"-1")) +
-  theme(aspect.ratio = 120 / 160)
+  theme(aspect.ratio = 120 / 160) +
+  theme(legend.position = "bottom")
 
 tmp <- bandRadDF %>% 
   dplyr::rename(bandValueAtm = bandValue) %>%
@@ -114,7 +115,8 @@ ggplot(tmp %>% filter(between(bandValueAtm - bandValue, 0, 3.5))) +
   scale_x_reverse() +
   ggtitle("Difference") +
   labs(fill = "delta_L") +
-  theme(aspect.ratio = 120 / 160)
+  theme(aspect.ratio = 120 / 160) +
+  theme(legend.position = "bottom")
 
 ```
 
@@ -122,4 +124,4 @@ To convert the band radiance back to temperature, a band radiance to temperature
 <!-- $$L = \int_{\lambda=7\mu m}^{\lambda=14\mu m} d\lambda~R_\lambda B_\lambda(T)$$ -->
 ![LtoT_LUT](README_files/figure-misc/Tex2Img_1.png)
 
-where _L_ is the band radiance, _R_ is the spectral response function and _B_ is the planck function. Across a range of temperatures, a polynomial can be fitted to find a temperature for _L_ that is shown in the above figure. 
+where _L_ is the band radiance, _R_ is the spectral response function and _B_ is the planck function. Across a range of temperatures, a polynomial regression can befound with _L_.

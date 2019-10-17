@@ -17,8 +17,12 @@ dataDF <- melt(as.matrix(rawData), varnames = c("x", "y"))
 
 ggplot(dataDF) +
   geom_raster(aes(x = x, y = y, fill = value)) +
+  theme_bw() +
   coord_flip() +
-  scale_x_reverse()
+  scale_x_reverse() +
+  ggtitle("Optris PI thermal camera image") +
+  labs(fill = "Tb (K)") +
+  theme(legend.position = "bottom")
 ```
 
 The grey areas are "dead pixels" that were removed as a quality control step. The camera has a wide angle lens (~ 72 degrees) and naturally has a barrel-shaped distortion. This was corrected as part of another quality control step to give the rectilinear image shown in the above plot.

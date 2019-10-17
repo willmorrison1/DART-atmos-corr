@@ -18,8 +18,12 @@ dataDF <- melt(as.matrix(rawData), varnames = c("x", "y"))
 
 ggplot(dataDF) +
   geom_raster(aes(x = x, y = y, fill = value)) +
+  theme_bw() +
   coord_flip() +
-  scale_x_reverse()
+  scale_x_reverse() +
+  ggtitle("Optris PI thermal camera image") +
+  labs(fill = "Tb (K)") +
+  theme(legend.position = "bottom")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-1-2-1.png)<!-- -->

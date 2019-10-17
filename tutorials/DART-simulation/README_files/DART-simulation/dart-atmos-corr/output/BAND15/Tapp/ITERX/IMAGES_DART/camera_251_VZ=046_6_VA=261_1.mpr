@@ -5,12 +5,12 @@ Type=BaseMap
 
 [BaseMap]
 CoordSystem=unknown.csy
-CoordBounds=0 -0.048 0.036 0
+CoordBounds=0 -0.04 0.03 0
 Domain=value.dom
 DomainInfo=value.dom;Long;value;0;-9999999.9:9999999.9:0.1:offset=0;
 Range=-1e+300:1e+300:0.000000:offset=0
 Type=Map
-MinMax=107.149:364.544
+MinMax=109.921:358.52
 
 [Map]
 GeoRef=camera_251_VZ=046_6_VA=261_1.grf

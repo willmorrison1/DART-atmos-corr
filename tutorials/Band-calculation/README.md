@@ -108,7 +108,8 @@ ggplot(bandRadDF %>% filter(between(bandValue, 30, 85))) +
   scale_x_reverse() +
   ggtitle("At-sensor surface leaving band radiance") +
   labs(fill = expression(italic(L)~"(W m"^"-2"~sr^-1~mu*m^"-1")) +
-  theme(aspect.ratio = 120 / 160)
+  theme(aspect.ratio = 120 / 160) +
+  theme(legend.position = "bottom")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
@@ -131,7 +132,8 @@ ggplot(tmp %>% filter(between(bandValueAtm - bandValue, 0, 3.5))) +
   scale_x_reverse() +
   ggtitle("Difference") +
   labs(fill = "delta_L") +
-  theme(aspect.ratio = 120 / 160)
+  theme(aspect.ratio = 120 / 160) +
+  theme(legend.position = "bottom")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
