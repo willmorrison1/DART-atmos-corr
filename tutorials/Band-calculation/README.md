@@ -26,7 +26,7 @@ radDF <- as.data.frame(simData_radAtm)
 
 Band calculation trapezoidal approximation:
 
-$$\int_{\lambda=1}^{\lambda=n}d\lambda~L_\lambda R_\lambda\approx\sum_{i=1}^n \frac{1}{2} \Bigg[\Big[\frac{1}{2}(\lambda_{max_{i}}-\lambda_{min_{i}}) \Big]\times (L_{\lambda_{i}}R_{min_{i}}+ L_{\lambda_{i}}R_{mid_{i}}+L_{\lambda_{i}}R_{mid_{i}}+L_{\lambda_{i}}R_{max_{i}})\Bigg]$$
+$$\int_{\lambda=1}^{\lambda=n}d\lambda~L_\lambda R_\lambda\approx\sum_{i=1}^n \frac{1}{2} \Bigg[\Big[\frac{1}{2}(\lambda_{max_{i}}-\lambda_{min_{i}})\Big]\times(L_{\lambda_{i}}R_{min_{i}}+ L_{\lambda_{i}}R_{mid_{i}}+L_{\lambda_{i}}R_{mid_{i}}+L_{\lambda_{i}}R_{max_{i}})\Bigg]$$
 
 Define the real world observations. This should be a data frame which has information that can relate to the model world observations. Namely: pixels (x, y), brightness temperature (value), the image type (imgType) and DART image number that models its perspective (imageNo). This way, each model world camera is matched to the correct real world camera.
 
