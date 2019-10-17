@@ -124,7 +124,7 @@ tmp <- bandRadDF %>%
 ```
 
 ```r
-ggplot(tmp) +
+ggplot(tmp %>% filter(between(bandValueAtm - bandValue, 0, 5))) +
   geom_raster(aes(x = x, y = y, fill = bandValueAtm - bandValue)) +
   theme_bw() +
   coord_flip() +
