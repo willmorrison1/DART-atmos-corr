@@ -142,4 +142,4 @@ To convert the band radiance back to temperature, a band radiance to temperature
 <!-- $$L = \int_{\lambda=7\mu m}^{\lambda=14\mu m} d\lambda~R_\lambda B_\lambda(T)$$ -->
 ![LtoT_LUT](README_files/figure-misc/Tex2Img_1.png)
 
-where _L_ is the band radiance, _R_ is the spectral response function and _B_ is the planck function. Across a range of temperatures, a polynomial can be fitted to find a temperature for _L_ that is shown in the above figure. 
+where _L_ is the band radiance, _R_ is the spectral response function and _B_ is the planck function. Across a range of temperatures, a polynomial regression can befound with _L_.

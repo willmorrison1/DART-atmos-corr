@@ -104,7 +104,7 @@ radDF$value[radDF$value == 0] <- NA
 ```
 
 Now plot the data. Plot all raw images.
-``` {r, warning = FALSE, message = FALSE}
+``` {r, warning = FALSE, message = FALSE, dpi = 250}
 
 plotThemes <- theme(
   axis.text = element_blank(),
@@ -134,12 +134,13 @@ ggplot(radDF) +
   coord_flip() +
   scale_x_reverse(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
-  ggtitle("Atmospheric spectral radiance")
+  ggtitle("Atmospheric spectral radiance") +
+  theme(legend.position = "bottom")
 
 ```
 
 Now do some simple aggregation of the data and plot the median transmittance (line) and 5th -> 9th percentile (shading) across all pixels.
-```{r, fig.height = 3, warning = FALSE, message = FALSE}
+```{r, fig.height = 3, warning = FALSE, message = FALSE, dpi = 250}
 transDFsummary <- transDF %>%
   dplyr::group_by(band, imgType, imageNo, simName) %>%
   dplyr::summarise(minValue = quantile(value, 0.05, na.rm = TRUE),
@@ -151,7 +152,8 @@ ggplot(transDFsummary %>% dplyr::left_join(wavelengths(simData_radAtm))) +
   geom_line(aes(x = lambdamid, y = medValue), size = 0.65) +
   xlab(expression(wavelength~"("*mu*m*")")) +
   ylab("Transmittance") + 
-  theme_bw()
+  theme_bw() +
+  theme(legend.position = "bottom")
 
 ```
 

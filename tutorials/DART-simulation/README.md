@@ -151,7 +151,8 @@ ggplot(radDF) +
   coord_flip() +
   scale_x_reverse(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
-  ggtitle("Atmospheric spectral radiance")
+  ggtitle("Atmospheric spectral radiance") +
+  theme(legend.position = "bottom")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
@@ -170,7 +171,8 @@ ggplot(transDFsummary %>% dplyr::left_join(wavelengths(simData_radAtm))) +
   geom_line(aes(x = lambdamid, y = medValue), size = 0.65) +
   xlab(expression(wavelength~"("*mu*m*")")) +
   ylab("Transmittance") + 
-  theme_bw()
+  theme_bw() +
+  theme(legend.position = "bottom")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
