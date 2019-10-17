@@ -140,7 +140,7 @@ ggplot(transDF) +
   ggtitle("Atmospheric spectral transmittance")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ```r
 ggplot(radDF) +
@@ -154,7 +154,7 @@ ggplot(radDF) +
   ggtitle("Atmospheric spectral radiance")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-5-2.png)
+![](README_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
 
 Now do some simple aggregation of the data and plot the median transmittance (line) and 5th -> 9th percentile (shading) across all pixels.
 
@@ -173,5 +173,5 @@ ggplot(transDFsummary %>% dplyr::left_join(wavelengths(simData_radAtm))) +
   theme_bw()
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 

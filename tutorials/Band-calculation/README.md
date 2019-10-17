@@ -37,7 +37,14 @@ Define the real world observations. This should be a data frame which has inform
 
 
 ```r
-DFobs <- expand.grid(x = unique(transDF$x), y = unique(transDF$y), value = 300, imgType = "camera", imageNo = 251)
+library(reshape2)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(raster)
+rawData <- raster("../Real-world-images/README_files/data/C17_sampleImg.tif")
+DFobs <- melt(as.matrix(rawData), varnames = c("y", "x")) %>%
+  dplyr::mutate(y = rev(y), imgType = "camera", imageNo = 251L)
 ```
 
 # Spectral response function
@@ -54,7 +61,7 @@ points(SRF_raw, pch = 20)
 legend("bottomright", legend = c("SRF_raw", "SRFinterp_normalised"), col = c("black", "red"), lty = 1)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 # Band calculation
 
@@ -96,7 +103,7 @@ ggplot(bandRadDF %>% filter(between(bandValue, 48, 52))) +
   theme(aspect.ratio = 120/160)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 To convert the band radiance back to temperature, a band radiance to temperature function needs to be created. Band radiance is related to temperature using the following equation:
 <!-- $$L = \int_{\lambda=7\mu m}^{\lambda=14\mu m} d\lambda~R_\lambda B_\lambda(T)$$ -->

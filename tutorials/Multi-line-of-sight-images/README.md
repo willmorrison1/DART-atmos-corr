@@ -39,48 +39,10 @@ The [output file(s)](README_files/figure-misc/Camera.tiff) will be saved in a fo
 
 ```r
 library(raster, sp)
-```
-
-```
-## Warning: package 'raster' was built under R version 3.4.4
-```
-
-```
-## Loading required package: sp
-```
-
-```
-## Warning: package 'sp' was built under R version 3.4.4
-```
-
-```
-## 
-## Attaching package: 'raster'
-```
-
-```
-## The following object is masked from 'package:data.table':
-## 
-##     shift
-```
-
-```
-## The following object is masked from 'package:dplyr':
-## 
-##     select
-```
-
-```
-## The following object is masked from 'package:daRt':
-## 
-##     getData
-```
-
-```r
 plot(raster("README_files/figure-misc/Camera.tiff"), main = "RAW tiff")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-1-2-1.png)
+![](README_files/figure-gfm/unnamed-chunk-1-2-1.png)<!-- -->
 
 The image colourdepth is scaled to 16 bit tiff format. To rescale this to units of m, the files should be loaded and rescaled using the following formula
 
@@ -100,7 +62,7 @@ zPath <- (RAW / 65535) * renderDistance
 plot(zPath, zlim = c(0, 250), main = "Camera to surface path length (m)")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 This image is available for reference.
 
