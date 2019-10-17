@@ -76,9 +76,7 @@ ggplot(bandRadDF %>% filter(between(bandValue, 48, 52))) +
 
 ![](README_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
-### DART band calc
 
-The daRt band calculation methods have been validated with those provided by the DART team. These methods are incompatible with the complete correction of real world images, but allow for the band calculation of simulated images.  A bash script (BandCalc.sh) performs the band calculation using the DART method. It should be modified based on your python version (3.X) and any further requirements.
 
 
 ```r
