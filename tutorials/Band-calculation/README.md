@@ -117,6 +117,11 @@ ggplot(bandRadDF %>% filter(between(bandValue, 30, 85))) +
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
+# Correction magnitude
+
+The correction magnitude is calculated here for band radiance. Steps to convert band radiance to temperature are noted.
+
+
 ```r
 diffDF <- bandRadDF %>% 
   dplyr::rename(bandValueAtm = bandValue) %>%
@@ -129,7 +134,7 @@ diffDF <- bandRadDF %>%
 
 ```r
 ggplot(diffDF %>% 
-         filter(between(bandValueAtm - bandValue, 0.25, 3.25))) +
+         filter(between(bandValueAtm - bandValue, 0.5, 2.75))) +
   geom_raster(aes(x = x, y = y, fill = bandValueAtm - bandValue)) +
   theme_bw() +
   coord_flip() +
@@ -140,7 +145,7 @@ ggplot(diffDF %>%
   theme(legend.position = "bottom")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 To convert the band radiance back to temperature, a band radiance to temperature function needs to be created. Band radiance is related to temperature using the following equation:
 <!-- $$L = \int_{\lambda=7\mu m}^{\lambda=14\mu m} d\lambda~R_\lambda B_\lambda(T)$$ -->
