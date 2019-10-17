@@ -102,7 +102,7 @@ ggplot(bandRadDF %>% filter(between(bandValue, 30, 85))) +
   theme_bw() +
   coord_flip() +
   scale_x_reverse() +
-  ggtitle("At-sensor surface leaving band radiance") +
+  ggtitle("Surface leaving band radiance") +
   labs(fill = expression(italic(L)~"(W m"^"-2"~sr^-1~mu*m^"-1")) +
   theme(aspect.ratio = 120 / 160) +
   theme(legend.position = "bottom")
