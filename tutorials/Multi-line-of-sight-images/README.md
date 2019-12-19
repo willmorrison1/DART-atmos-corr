@@ -14,7 +14,6 @@ Define the model world `.blend` file path as created [here](../Model-world) and 
 
 ```
 "tutorials\Model-world\README_files\geometry\model-world.blend"
-
 ```
 Define the python script location to be used by Blender to get the surface to camera path length information: [writeCameraPathLengths.py](code/writeCameraPathLengths.py).
 
