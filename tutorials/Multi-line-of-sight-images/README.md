@@ -24,7 +24,6 @@ Define the python script location to be used by Blender to get the surface to ca
 This script can be modified with various rendering parameters (e.g. image resolution). By default it conforms to the 
 [real world image](../Real-world-images). It also contains many important rendering setings to ensure the colourspace of the render enables correct conversion to distance (m).
 
-```
 Execute the following command (will require modification based on your file locations) in a command line:
 
 ```
