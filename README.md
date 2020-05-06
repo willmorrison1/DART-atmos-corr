@@ -6,7 +6,7 @@ infrared camera imagery using the [Discrete Anisotropic Radiative
 Transfer (DART)](http://www.cesbio.ups-tlse.fr/us/dart.html) model.
 
 This repository contains tutorials to give readers of Morrison *et al.*
-(2019) (in press) a hands-on guide to performing atmospheric corrections
+(2020) a hands-on guide to performing atmospheric corrections
 for longwave infrared camera imagery across complex terrain.
 
 ![DARTscene3D\_London\_Islington](readme/DARTscene3D_London_Islington.PNG)
@@ -42,3 +42,6 @@ process.
     path lengths between the surface and camera.
 2.  [**DART image post-processing
     (WIP)**](tutorials/DART-simulation-post-processing).
+    
+# References
+Morrison, W., Yin, T., Lauret, N., Guilleux, J., Kotthaus, S., Gastellu-Etchegorry, J.-P., Norford, L., Grimmond, S., 2020. Remote Sens. Environ. 237, 111524. https://doi.org/10.1016/j.rse.2019.111524
